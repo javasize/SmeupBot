@@ -18,9 +18,15 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/jtelebot-core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jtelebot-server"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SmeupDevSVN"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/telegrambot"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jtelebot-core"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
