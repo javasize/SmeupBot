@@ -29,7 +29,8 @@ public class AgendeReplyKeyboardMarkup implements CustomReplyKeyboard{
 	 * Array of button rows, each represented by an Array of Strings
 	 * */
 	@JsonProperty("keyboard")
-	private String[][] keyboard= new String[][] {{"Agenda Oggi"}, {"Agende A", "Agende B", "Agende C"}, {"Agende D", "Agende G", "Agende M"}, {"Agende P", "Agende R", "Agende T"}, {"Start"}};
+	private String[][] keyboard= new String[][] {{"Agende A", "Agende B", "Agende C"}, {"Agende D", "Agende G", "Agende M"}, {"Agende P", "Agende R", "Agende T"}, {"Start"}};
+//    private String[][] keyboard= new String[][] {{"Agenda Oggi"}, {"Agende A", "Agende B", "Agende C"}, {"Agende D", "Agende G", "Agende M"}, {"Agende P", "Agende R", "Agende T"}, {"Start"}};
     
 	/**
 	 * Optional. Requests clients to resize the keyboard vertically for optimal

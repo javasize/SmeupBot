@@ -29,7 +29,7 @@ public class StartReplyKeyboardMarkup implements CustomReplyKeyboard{
 	 * Array of button rows, each represented by an Array of Strings
 	 * */
 	@JsonProperty("keyboard")
-    private String[][] keyboard= new String[][] {{"START"}};
+    private String[][] keyboard= new String[][] {{"Start"}};
 
 	/**
 	 * Optional. Requests clients to resize the keyboard vertically for optimal

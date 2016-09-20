@@ -13,7 +13,10 @@ import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandWatcher;
  
 public class JavasizeTestBotMain {
     public static void main(String []args){
+        System.out.println("Start");
         SmeupConnectors.init();
+//        new SmeupRequestSender().init();
+
         DefaultCommandDispatcher commandDispatcher = new DefaultCommandDispatcher(10,100, 100, new DefaultCommandQueue());
         commandDispatcher.startUp();
          

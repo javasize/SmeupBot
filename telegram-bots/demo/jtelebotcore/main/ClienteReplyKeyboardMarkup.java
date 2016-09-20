@@ -31,7 +31,7 @@ public class ClienteReplyKeyboardMarkup implements CustomReplyKeyboard{
 	 * Array of button rows, each represented by an Array of Strings
 	 * */
 	@JsonProperty("keyboard")
-	private String[][] keyboard= new String[][] {{"CONTABILE CLIENTE {0}"},{"FISCALE CLIENTE {0}"},{"IMMAGINE CLIENTE {0}"}};
+	private String[][] keyboard= new String[][] {{"Contabile Cliente {0}"},{"Fiscale Cliente {0}"},{"Immagine Cliente {0}"}};
 
 	/**
 	 * Optional. Requests clients to resize the keyboard vertically for optimal
