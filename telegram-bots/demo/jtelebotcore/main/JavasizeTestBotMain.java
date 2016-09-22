@@ -15,7 +15,7 @@ public class JavasizeTestBotMain {
     public static void main(String []args){
         System.out.println("Start");
         SmeupConnectors.init();
-//        new SmeupRequestSender().init();
+        new SmeupMessageSender().init();
 
         DefaultCommandDispatcher commandDispatcher = new DefaultCommandDispatcher(10,100, 100, new DefaultCommandQueue());
         commandDispatcher.startUp();

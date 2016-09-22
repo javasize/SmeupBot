@@ -9,7 +9,7 @@ public class JavasizeBotMain {
  
     public static void main(String []args){
         SmeupConnectors.init();
-        new SmeupRequestSender().init();
+        new SmeupMessageSender().init();
         DefaultCommandDispatcher commandDispatcher = new DefaultCommandDispatcher(10,100, 100, new DefaultCommandQueue());
         commandDispatcher.startUp();
          
