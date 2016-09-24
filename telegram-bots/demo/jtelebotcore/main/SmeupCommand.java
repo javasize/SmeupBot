@@ -995,7 +995,7 @@ public class SmeupCommand extends AbstractCommand
             }
 
         }
-        else if(("INDICI").equalsIgnoreCase(vFun))
+        else if(("INDICI").equalsIgnoreCase(vFun) && Utility.isFunctionEnabled(vFun, vFirstName, vLastName, vUserID))
         {
             String vRespText = "Ciao " + vFirstName + " "
                         + vLastName
@@ -1016,8 +1016,8 @@ public class SmeupCommand extends AbstractCommand
             }
         }
 
-        else if(vFun.toUpperCase().startsWith("INDICI ")
-                    || vFun.toUpperCase().startsWith("INDICI_"))
+        else if((vFun.toUpperCase().startsWith("INDICI ")
+                    || vFun.toUpperCase().startsWith("INDICI_")) && Utility.isFunctionEnabled(vFun, vFirstName, vLastName, vUserID))
         {
             String vResp = "";
             Date vDate= Calendar.getInstance().getTime();

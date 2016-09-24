@@ -32,6 +32,7 @@ public class CiaoReplyKeyboardMarkup extends ReplyKeyboardMarkup{
 	 * */
 	@JsonProperty("keyboard")
     private String[][] keyboard= new String[][] {{"Agende"}, {"Sentinelle"}, {"Commesse"}, {"Indici"}};
+//    private String[][] keyboard= new String[][] {{"Agende"}, {"Sentinelle"}, {"Commesse"}};
 
 	/**
 	 * Optional. Requests clients to resize the keyboard vertically for optimal
