@@ -54,7 +54,7 @@ public class SmeupMessageSender
                 long vNowTimeDelta= vNowTime-vMidnightTime;
 //                // Fra le 8:30:00 e le 8:30:10
                 long vDelta= vNowTimeDelta-TIME_TO_SEND_DELTA;
-                if(vDelta>0 && vDelta<(3600*1000)+1)
+                if(true || (vDelta>0 && vDelta<(3600*1000)+1))
                 {
                     ArrayList<String[]> vList= Utility.getNotificationList(BotData.BOT_SMEUP_TOKEN);
                     if(vList!=null)
@@ -105,7 +105,7 @@ public class SmeupMessageSender
         try
         {
             System.out.println("Invio "+aText+" a "+aFirstName+" "+aLastName);
-            SmeupResponseData vData= SmeupCommand.createSmeupResponse(aText, aFirstName, aLastName, aChatID, aChatID, new StartReplyKeyboardMarkup());
+            SmeupResponseData vData= SmeupCommand.createSmeupResponse(aText, aFirstName, aLastName, aChatID, aChatID, true, new StartReplyKeyboardMarkup());
             jsonResponse = iRequester.sendRequest(TelegramRequestFactory
                                                   .createSendMessageRequest(aChatID, vData.getText(), true, null,
                                                                             vData.getKeyboard()));

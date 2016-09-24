@@ -222,7 +222,7 @@ public class SmeupCommand extends AbstractCommand
     }
     
     
-    public static SmeupResponseData createSmeupResponse(String aFun, String aFirstName, String aLastName, long aUserID, long aChatID, CustomReplyKeyboard aDefaultKeyboardMarkup)
+    public static SmeupResponseData createSmeupResponse(String aFun, String aFirstName, String aLastName, long aUserID, long aChatID, boolean aIsNotification, CustomReplyKeyboard aDefaultKeyboardMarkup)
     {
         CustomReplyKeyboard vKeyboardMarkup= aDefaultKeyboardMarkup;
         String vFun= aFun;
@@ -382,7 +382,7 @@ public class SmeupCommand extends AbstractCommand
             }
             String vRespText = "Ciao " + vFirstName + " "
                         + vLastName
-                        + ". Ecco l'elenco delle sentinella del mese: \r\n"
+                        + (aIsNotification? ". Ti aggiorno sulle sentinelle del mese: \r\n": ". Ecco l'elenco delle sentinella del mese: \r\n")
                         + (vResp != null
                                     ? (vResp.length() > 4096
                                                 ? vResp.substring(0,
@@ -704,7 +704,11 @@ public class SmeupCommand extends AbstractCommand
                 // TODO Auto-generated catch block
                 ex.printStackTrace();
             }
-            vKeyboardMarkup = new AgendeReplyKeyboardMarkup();
+
+            if(!aIsNotification)
+            {
+                vKeyboardMarkup = new AgendeReplyKeyboardMarkup();
+            }
         }
         else if(vFun.toUpperCase().startsWith("AGENDA ")
                     || vFun.toUpperCase().startsWith("AGENDA_"))
@@ -842,7 +846,7 @@ public class SmeupCommand extends AbstractCommand
             }
             String vRespText = "Ciao " + vFirstName + " "
                         + vLastName
-                        + ". Ecco l'agenda di " + vCodiceAgenda
+                        + (aIsNotification? ". Ti aggiorno sull'agenda di " + vCodiceAgenda: ". Ecco l'agenda di " + vCodiceAgenda)
                         + ": \r\n"
                         + (vResp != null
                                     ? (vResp.length() > 4096
@@ -878,7 +882,10 @@ public class SmeupCommand extends AbstractCommand
                 ex.printStackTrace();
             }
 
-            vKeyboardMarkup = new CommesseReplyKeyboardMarkup();
+            if(!aIsNotification)
+            {
+                vKeyboardMarkup = new CommesseReplyKeyboardMarkup();
+            }
         }
         else if(vFun.toUpperCase().startsWith("COMMESSA ")
                     || vFun.toUpperCase().startsWith("COMMESSA_"))
@@ -967,7 +974,7 @@ public class SmeupCommand extends AbstractCommand
             }
             String vRespText = "Ciao " + vFirstName + " "
                         + vLastName
-                        + ". Commessa " + Arrays.toString(vCodComArr)
+                        + (aIsNotification? ". Ti aggiorno sulla commessa" + Arrays.toString(vCodComArr) : ". Commessa " + Arrays.toString(vCodComArr))
                         + ", del giorno " + vDateNowDay + "/"
                         + vDateNowMonth + "/" + vDateNowYear + ": \r\n"
                         + (vResp != null
@@ -1003,8 +1010,10 @@ public class SmeupCommand extends AbstractCommand
                 // TODO Auto-generated catch block
                 ex.printStackTrace();
             }
-            vKeyboardMarkup = new IndiciReplyKeyboardMarkup();
-
+            if(!aIsNotification)
+            {
+                vKeyboardMarkup = new IndiciReplyKeyboardMarkup();
+            }
         }
 
         else if(vFun.toUpperCase().startsWith("INDICI ")
@@ -1127,7 +1136,7 @@ public class SmeupCommand extends AbstractCommand
                 }
                 String vRespText = "Ciao " + vFirstName + " "
                         + vLastName
-                        + ". Totale indici del giorno " + vDateStringDay + "/"
+                        + (aIsNotification? ". Ti aggiorno sul totale indici del giorno " :  ". Totale indici del giorno ") + vDateStringDay + "/"
                         + vDateStringMonth + "/" + vDateStringYear + ": \r\n"
                         + (vResp != null
                                     ? (vResp.length() > 4096
@@ -1293,8 +1302,10 @@ public class SmeupCommand extends AbstractCommand
                 // TODO Auto-generated catch block
                 ex.printStackTrace();
             }
-            vKeyboardMarkup = new ClienteReplyKeyboardMarkup(vCod);
-
+            if(!aIsNotification)
+            {
+                vKeyboardMarkup = new ClienteReplyKeyboardMarkup(vCod);
+            }
         }
         else if(((vFun).startsWith("INDIRIZZO CLIENTE ")
                     || (vFun).startsWith("INDIRIZZO_CLIENTE_")))
@@ -1841,7 +1852,7 @@ public class SmeupCommand extends AbstractCommand
                     vFun = vFun.replace("/", "");
                 }
                 
-                SmeupResponseData vRespData= createSmeupResponse(vFun, vFirstName, vLastName, vUserID, vChatID, vKeyboardMarkup);
+                SmeupResponseData vRespData= createSmeupResponse(vFun, vFirstName, vLastName, vUserID, vChatID, false, vKeyboardMarkup);
                 vRespMsg= vRespData.getText();
                 vKeyboardMarkup= vRespData.getKeyboard();
             }

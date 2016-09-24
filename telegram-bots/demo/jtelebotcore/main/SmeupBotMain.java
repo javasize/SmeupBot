@@ -10,7 +10,7 @@ public class SmeupBotMain {
     public static void main(String []args){
         SmeupConnectors.init();
         
-        new SmeupMessageSender().init();
+//        new SmeupMessageSender().init();
 
         DefaultCommandDispatcher vJavasizeCommandDispatcher = new DefaultCommandDispatcher(10,100, 100, new DefaultCommandQueue());
         vJavasizeCommandDispatcher.startUp();
