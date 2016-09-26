@@ -73,22 +73,24 @@ public class Utility
     {
         ArrayList<String[]> vRetList = new ArrayList<>();
         String[][] vArr = getUserList(aBotName);
-
-        if(vArr != null && vArr.length > 0)
+        if(vArr!=null)
         {
-            for( int vI = 0; vI < vArr.length; vI++)
+            if(vArr != null && vArr.length > 0)
             {
-                String[] vStrings = vArr[vI];
-                if(vStrings.length > 2)
+                for( int vI = 0; vI < vArr.length; vI++)
                 {
-                    String vFirstName = vStrings[0];
-                    String vLastName = vStrings.length > 1? vStrings[1]: "";
-                    String vID = vStrings.length > 2? vStrings[2]: "";
-                    String vText = vStrings.length > 3? vStrings[3]: "";
-                    if(vID != null && !"".equalsIgnoreCase(vID.trim()))
+                    String[] vStrings = vArr[vI];
+                    if(vStrings.length > 2)
                     {
-                        vRetList.add(new String[] { vFirstName, vLastName, vID,
-                                    vText });
+                        String vFirstName = vStrings[0];
+                        String vLastName = vStrings.length > 1? vStrings[1]: "";
+                        String vID = vStrings.length > 2? vStrings[2]: "";
+                        String vText = vStrings.length > 3? vStrings[3]: "";
+                        if(vID != null && !"".equalsIgnoreCase(vID.trim()))
+                        {
+                            vRetList.add(new String[] { vFirstName, vLastName, vID,
+                                        vText });
+                        }
                     }
                 }
             }
@@ -206,16 +208,17 @@ public class Utility
     {
         String[][] vRet = new String[][] {};
         String vFunToCall = SmeupCommand.FUN_AUTH_LIST;
-        String vXmlResp;
+        String vXmlResp=null;
         A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM.checkOut();
-        vXmlResp = vConn != null
-                    ? vConn.executeFun(vFunToCall,
-                                       new HashMap<String, String>())
-                    : UIXmlProvider.readXml(UIFunInputStructure
-                                .getFunInputStructure(vFunToCall));
         if(vConn != null)
         {
+            vXmlResp = vConn.executeFun(vFunToCall,
+                                           new HashMap<String, String>());
             SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+        }
+        else
+        {
+            return null;
         }
         String vMailAddr = "";
         String vName = "";
@@ -345,17 +348,24 @@ public class Utility
         if(aFirtsName != null && aLastName != null)
         {
             String[][] vUserList = getUserList(aBotName);
-            for( int vI = 0; vI < vUserList.length && !vRetFound; vI++)
+            if(vUserList!=null)
             {
-                String[] vStrings = vUserList[vI];
-                if(vStrings != null && vStrings.length > 1)
+                for( int vI = 0; vI < vUserList.length && !vRetFound; vI++)
                 {
-                    vRetFound = (aFirtsName.equalsIgnoreCase(vStrings[0])
-                                && aLastName.equalsIgnoreCase(vStrings[1]));
-                    if(!vRetFound)
+                    String[] vStrings = vUserList[vI];
+                    if(vStrings != null && vStrings.length > 1)
+                    {
                         vRetFound = (aFirtsName.equalsIgnoreCase(vStrings[0])
                                     && aLastName.equalsIgnoreCase(vStrings[1]));
+                        if(!vRetFound)
+                            vRetFound = (aFirtsName.equalsIgnoreCase(vStrings[0])
+                                        && aLastName.equalsIgnoreCase(vStrings[1]));
+                    }
                 }
+            }
+            else
+            {
+                vRetFound= false;
             }
         }
         return vRetFound;
