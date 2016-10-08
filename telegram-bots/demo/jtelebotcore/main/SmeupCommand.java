@@ -238,9 +238,9 @@ public class SmeupCommand extends AbstractCommand
         if(("CIAO").equalsIgnoreCase(vFun)
                     || ("START").equalsIgnoreCase(vFun))
         {
-            String vRespText = "Ciao " + vFirstName + " "
+            String vRespText = "Bentornato " + vFirstName + " "
                         + vLastName
-                        + ". Sei autorizzato a dialogare con Sme.UP.";
+                        + ". Ecco le opzioni attive.";
             try
             {
                 vRespMsg = new String(vRespText.getBytes(),

@@ -12,11 +12,11 @@ public class SmeupBotMain {
         
 //        new SmeupMessageSender().init();
 
-        DefaultCommandDispatcher vJavasizeCommandDispatcher = new DefaultCommandDispatcher(10,100, 100, new DefaultCommandQueue());
-        vJavasizeCommandDispatcher.startUp();
-         
-        DefaultCommandWatcher vJavasizeCommandWatcher = new DefaultCommandWatcher(2000,100,BotData.BOT_JAVASIZE_TOKEN,vJavasizeCommandDispatcher,new JavasizeCommandFactory());
-        vJavasizeCommandWatcher.startUp();
+//        DefaultCommandDispatcher vJavasizeCommandDispatcher = new DefaultCommandDispatcher(10,100, 100, new DefaultCommandQueue());
+//        vJavasizeCommandDispatcher.startUp();
+//         
+//        DefaultCommandWatcher vJavasizeCommandWatcher = new DefaultCommandWatcher(2000,100,BotData.BOT_JAVASIZE_TOKEN,vJavasizeCommandDispatcher,new JavasizeCommandFactory());
+//        vJavasizeCommandWatcher.startUp();
 
         DefaultCommandDispatcher vSmeupCommandDispatcher = new DefaultCommandDispatcher(10,100, 100, new DefaultCommandQueue());
         vSmeupCommandDispatcher.startUp();
