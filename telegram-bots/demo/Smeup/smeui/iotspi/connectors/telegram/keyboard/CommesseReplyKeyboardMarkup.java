@@ -7,7 +7,7 @@
  * or implied. Any use is at your own risk.
  *
  */
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram.keyboard;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
@@ -23,14 +23,13 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.CustomReplyKeyboard;
 * @since 0.0.1
 */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AgendeReplyKeyboardMarkup implements CustomReplyKeyboard{
+public class CommesseReplyKeyboardMarkup implements CustomReplyKeyboard{
 
 	/**
 	 * Array of button rows, each represented by an Array of Strings
 	 * */
 	@JsonProperty("keyboard")
-	private String[][] keyboard= new String[][] {{"Agende A", "Agende B", "Agende C"}, {"Agende D", "Agende G", "Agende M"}, {"Agende P", "Agende R", "Agende T"}, {"Start"}};
-//    private String[][] keyboard= new String[][] {{"Agenda Oggi"}, {"Agende A", "Agende B", "Agende C"}, {"Agende D", "Agende G", "Agende M"}, {"Agende P", "Agende R", "Agende T"}, {"Start"}};
+	private String[][] keyboard= new String[][] {{"Commessa AMA", "Commessa AFE", "Commessa ARL"}, {"Commessa AMA|AFE|ARL"}, {"Start"}};
     
 	/**
 	 * Optional. Requests clients to resize the keyboard vertically for optimal
@@ -165,7 +164,7 @@ public class AgendeReplyKeyboardMarkup implements CustomReplyKeyboard{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AgendeReplyKeyboardMarkup other = (AgendeReplyKeyboardMarkup) obj;
+		CommesseReplyKeyboardMarkup other = (CommesseReplyKeyboardMarkup) obj;
 		if (!Arrays.deepEquals(keyboard, other.keyboard))
 			return false;
 		if (oneTimeKeyboard == null) {

@@ -1,4 +1,4 @@
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram;
 
 import io.github.nixtabyte.telegram.jtelebot.response.json.CustomReplyKeyboard;
 

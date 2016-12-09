@@ -1,4 +1,4 @@
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram.command;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,6 +26,16 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 
+import Smeup.smeui.iotspi.connectors.telegram.FileRequestHandler;
+import Smeup.smeui.iotspi.connectors.telegram.SmeupResponseData;
+import Smeup.smeui.iotspi.connectors.telegram.keyboard.AgendeReplyKeyboardMarkup;
+import Smeup.smeui.iotspi.connectors.telegram.keyboard.CiaoReplyKeyboardMarkup;
+import Smeup.smeui.iotspi.connectors.telegram.keyboard.ClienteReplyKeyboardMarkup;
+import Smeup.smeui.iotspi.connectors.telegram.keyboard.CommesseReplyKeyboardMarkup;
+import Smeup.smeui.iotspi.connectors.telegram.keyboard.IndiciReplyKeyboardMarkup;
+import Smeup.smeui.iotspi.connectors.telegram.keyboard.StartReplyKeyboardMarkup;
+import Smeup.smeui.iotspi.connectors.telegram.utility.SmeupConnectors;
+import Smeup.smeui.iotspi.connectors.telegram.utility.Utility;
 import Smeup.smeui.loa39.utility.A39Connection;
 import Smeup.smeui.loa39.utility.StringUtility;
 import Smeup.smeui.loa39.utility.UIXmlUtilities;
@@ -73,7 +83,7 @@ public class SmeupCommand extends AbstractCommand
     static final String FUN_AGE_COM = "F(EXB;X1SER_32;ESE.MAT) 1(;;) 2(;;) INPUT(NO() DT("
                 + "{0}" + ") CF(D) CodVer(No))";
 
-    static final String FUN_AUTH_LIST = "F(EXB;LOA13_SE;ESE.SQL) 1(;;) 2(;;) INPUT(SELECT * FROM X1TLGM0F)";
+    public static final String FUN_AUTH_LIST = "F(EXB;LOA13_SE;ESE.SQL) 1(;;) 2(;;) INPUT(SELECT * FROM X1TLGM0F)";
 
     static final String FUN_AGE_DAY = "F(EXB;X1SER_32;ESE.MAT) 1(;;) 2(;;) INPUT(NO() DT({0}) CF(D) CodVer(No))";
 

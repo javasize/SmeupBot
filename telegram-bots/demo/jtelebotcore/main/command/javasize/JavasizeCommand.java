@@ -1,4 +1,4 @@
-package jtelebotcore.main;
+package jtelebotcore.main.command.javasize;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import org.apache.http.message.BasicNameValuePair;
 
+import Smeup.smeui.iotspi.connectors.telegram.keyboard.StartReplyKeyboardMarkup;
 import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
 import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;
 import io.github.nixtabyte.telegram.jtelebot.exception.TelegramServerException;

@@ -1,4 +1,4 @@
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram.command;
 
 import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
 import io.github.nixtabyte.telegram.jtelebot.response.json.Message;

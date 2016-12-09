@@ -1,5 +1,8 @@
 package jtelebotcore.main;
 
+import Smeup.smeui.iotspi.connectors.telegram.SmeupMessageSender;
+import Smeup.smeui.iotspi.connectors.telegram.command.SmeupCommandFactory;
+import Smeup.smeui.iotspi.connectors.telegram.utility.SmeupConnectors;
 import config.BotData;
 import io.github.nixtabyte.telegram.jtelebot.client.impl.DefaultRequestHandler;
 import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;

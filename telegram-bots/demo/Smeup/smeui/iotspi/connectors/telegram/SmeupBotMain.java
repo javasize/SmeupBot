@@ -1,5 +1,7 @@
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram;
 
+import Smeup.smeui.iotspi.connectors.telegram.command.SmeupCommandFactory;
+import Smeup.smeui.iotspi.connectors.telegram.utility.SmeupConnectors;
 import config.BotData;
 import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandDispatcher;
 import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandQueue;

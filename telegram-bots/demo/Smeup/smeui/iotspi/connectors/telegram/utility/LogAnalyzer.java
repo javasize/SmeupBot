@@ -1,4 +1,4 @@
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram.utility;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -7,7 +7,7 @@
  * or implied. Any use is at your own risk.
  *
  */
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram.keyboard;
 
 import java.text.MessageFormat;
 import java.util.Arrays;

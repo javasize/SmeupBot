@@ -1,20 +1,27 @@
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 
+import Smeup.smeui.iotspi.connectors.telegram.command.SmeupTelegramPluginCommandFactory;
+import Smeup.smeui.iotspi.connectors.telegram.utility.SmeupConnectors;
 import Smeup.smeui.iotspi.datastructure.interfaces.SezInterface;
+import Smeup.smeui.iotspi.datastructure.interfaces.SubInterface;
 import Smeup.smeui.iotspi.datastructure.iotconnector.IoTConnectorConf;
 import Smeup.smeui.iotspi.datastructure.iotconnector.IoTConnectorInput;
 import Smeup.smeui.iotspi.datastructure.iotconnector.IoTConnectorResponse;
 import Smeup.smeui.iotspi.interaction.SPIIoTConnectorAdapter;
+import Smeup.smeui.iotspi.interaction.SPIIoTEvent;
 import config.BotData;
+import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
 import io.github.nixtabyte.telegram.jtelebot.response.json.TelegramResponse;
 import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandDispatcher;
 import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandQueue;
 import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandWatcher;
 
-public class SmeupTelegramSpiPlugin extends SPIIoTConnectorAdapter
+public class SmeupTelegramSpiPlugin extends SPIIoTConnectorAdapter implements SmeupTelegramRequestListener
+
 {
 //    SmeupMessageSender iTelegram = null;
     private SezInterface iSez = null;
@@ -39,7 +46,7 @@ public class SmeupTelegramSpiPlugin extends SPIIoTConnectorAdapter
 
         DefaultCommandWatcher vSmeupCommandWatcher = new DefaultCommandWatcher(
                     2000, 100, vBotSmeupToken, vSmeupCommandDispatcher,
-                    new SmeupCommandFactory(vBotUserName));
+                    new SmeupTelegramPluginCommandFactory(vBotUserName, this));
         vSmeupCommandWatcher.startUp();
 
 //        iTelegram = new SmeupMessageSender();
@@ -127,5 +134,26 @@ public class SmeupTelegramSpiPlugin extends SPIIoTConnectorAdapter
                 System.out.println(vKey + ": " + vValue);
             }
         }
+    }
+
+    @Override
+    public void requestReceived(Message aMessage)
+    {
+        ArrayList<SubInterface> vSubList= getSubList();
+        SPIIoTEvent vEvent= new SPIIoTEvent((vSubList!=null && vSubList.size()>0?vSubList.get(0).getId():null));
+        
+        long vUserID = aMessage.getFromUser().getId();
+        long vChatID = aMessage.getChat().getId();
+
+        String vFirstName = aMessage.getFromUser().getFirstName();
+        String vLastName = aMessage.getFromUser().getLastName();
+        String vRequestText= aMessage.getText();
+
+        vEvent.setData("Text", vRequestText);
+        vEvent.setData("FirstName", vFirstName);
+        vEvent.setData("LastName", vLastName);
+        vEvent.setData("UserID", ""+vUserID);
+        vEvent.setData("ChatID", ""+vChatID);
+        fireEventToSmeup(vEvent);
     }
 }

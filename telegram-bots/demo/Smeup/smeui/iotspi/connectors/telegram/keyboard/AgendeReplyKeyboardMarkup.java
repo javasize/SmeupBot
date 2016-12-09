@@ -7,17 +7,15 @@
  * or implied. Any use is at your own risk.
  *
  */
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram.keyboard;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
-
-import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboard;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.github.nixtabyte.telegram.jtelebot.response.json.ReplyKeyboardMarkup;
-
+import io.github.nixtabyte.telegram.jtelebot.response.json.CustomReplyKeyboard;
 /**
 *
 * ReplyKeyboardMarkup
@@ -25,15 +23,15 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.ReplyKeyboardMarkup;
 * @since 0.0.1
 */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CiaoReplyKeyboardMarkup extends ReplyKeyboardMarkup{
+public class AgendeReplyKeyboardMarkup implements CustomReplyKeyboard{
 
 	/**
 	 * Array of button rows, each represented by an Array of Strings
 	 * */
 	@JsonProperty("keyboard")
-    private String[][] keyboard= new String[][] {{"Agende"}, {"Sentinelle"}, {"Commesse"}, {"Indici"}};
-//    private String[][] keyboard= new String[][] {{"Agende"}, {"Sentinelle"}, {"Commesse"}};
-
+	private String[][] keyboard= new String[][] {{"Agende A", "Agende B", "Agende C"}, {"Agende D", "Agende G", "Agende M"}, {"Agende P", "Agende R", "Agende T"}, {"Start"}};
+//    private String[][] keyboard= new String[][] {{"Agenda Oggi"}, {"Agende A", "Agende B", "Agende C"}, {"Agende D", "Agende G", "Agende M"}, {"Agende P", "Agende R", "Agende T"}, {"Start"}};
+    
 	/**
 	 * Optional. Requests clients to resize the keyboard vertically for optimal
 	 * fit (e.g., make the keyboard smaller if there are just two rows of
@@ -167,7 +165,7 @@ public class CiaoReplyKeyboardMarkup extends ReplyKeyboardMarkup{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CiaoReplyKeyboardMarkup other = (CiaoReplyKeyboardMarkup) obj;
+		AgendeReplyKeyboardMarkup other = (AgendeReplyKeyboardMarkup) obj;
 		if (!Arrays.deepEquals(keyboard, other.keyboard))
 			return false;
 		if (oneTimeKeyboard == null) {

@@ -7,15 +7,17 @@
  * or implied. Any use is at your own risk.
  *
  */
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram.keyboard;
 
-import java.text.MessageFormat;
 import java.util.Arrays;
+
+import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboard;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.github.nixtabyte.telegram.jtelebot.response.json.CustomReplyKeyboard;
+import io.github.nixtabyte.telegram.jtelebot.response.json.ReplyKeyboardMarkup;
+
 /**
 *
 * ReplyKeyboardMarkup
@@ -23,15 +25,14 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.CustomReplyKeyboard;
 * @since 0.0.1
 */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ClienteReplyKeyboardMarkup implements CustomReplyKeyboard{
-
-    private String iCod= null;
+public class CiaoReplyKeyboardMarkup extends ReplyKeyboardMarkup{
 
 	/**
 	 * Array of button rows, each represented by an Array of Strings
 	 * */
 	@JsonProperty("keyboard")
-	private String[][] keyboard= new String[][] {{"Contabile Cliente {0}"},{"Fiscale Cliente {0}"},{"Immagine Cliente {0}"}};
+    private String[][] keyboard= new String[][] {{"Agende"}, {"Sentinelle"}, {"Commesse"}, {"Indici"}};
+//    private String[][] keyboard= new String[][] {{"Agende"}, {"Sentinelle"}, {"Commesse"}};
 
 	/**
 	 * Optional. Requests clients to resize the keyboard vertically for optimal
@@ -62,21 +63,16 @@ public class ClienteReplyKeyboardMarkup implements CustomReplyKeyboard{
 	@JsonProperty("selective")
 	private Boolean selective=true;
 
-	public ClienteReplyKeyboardMarkup(String aCod)
-	{
-	    iCod= aCod;
-	}
-	
 	public String[][] getKeyboard() {
 	    String[][] vKeyboard= keyboard;
-	    for( int vI = 0; vI < vKeyboard.length; vI++)
-        {
-	        String[] vRow= vKeyboard[vI];
-            for( int vI2 = 0; vI2 < vRow.length; vI2++)
-            {
-                vKeyboard[vI][vI2]= MessageFormat.format(vKeyboard[vI][vI2], iCod);
-            }
-        };
+//	    for( int vI = 0; vI < vKeyboard.length; vI++)
+//        {
+//	        String[] vRow= vKeyboard[vI];
+//            for( int vI2 = 0; vI2 < vRow.length; vI2++)
+//            {
+//                vKeyboard[vI][vI2]= MessageFormat.format(vKeyboard[vI][vI2], iCod);
+//            }
+//        };
 		return vKeyboard;
 	}
 
@@ -171,7 +167,7 @@ public class ClienteReplyKeyboardMarkup implements CustomReplyKeyboard{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ClienteReplyKeyboardMarkup other = (ClienteReplyKeyboardMarkup) obj;
+		CiaoReplyKeyboardMarkup other = (CiaoReplyKeyboardMarkup) obj;
 		if (!Arrays.deepEquals(keyboard, other.keyboard))
 			return false;
 		if (oneTimeKeyboard == null) {

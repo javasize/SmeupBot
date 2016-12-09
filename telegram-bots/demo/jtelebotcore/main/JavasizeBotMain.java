@@ -1,9 +1,12 @@
 package jtelebotcore.main;
 
+import Smeup.smeui.iotspi.connectors.telegram.SmeupMessageSender;
+import Smeup.smeui.iotspi.connectors.telegram.utility.SmeupConnectors;
 import config.BotData;
 import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandDispatcher;
 import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandQueue;
 import io.github.nixtabyte.telegram.jtelebot.server.impl.DefaultCommandWatcher;
+import jtelebotcore.main.command.javasize.JavasizeCommandFactory;
  
 public class JavasizeBotMain {
  

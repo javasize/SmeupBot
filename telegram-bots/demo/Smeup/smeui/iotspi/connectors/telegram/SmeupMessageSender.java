@@ -1,4 +1,4 @@
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -8,6 +8,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import Smeup.smeui.iotspi.connectors.telegram.command.SmeupCommand;
+import Smeup.smeui.iotspi.connectors.telegram.keyboard.StartReplyKeyboardMarkup;
+import Smeup.smeui.iotspi.connectors.telegram.utility.Utility;
 import Smeup.smeui.iotspi.datastructure.interfaces.SezInterface;
 import Smeup.smeui.iotspi.datastructure.iotconnector.IoTConnectorConf;
 import Smeup.smeui.iotspi.datastructure.iotconnector.IoTConnectorInput;
@@ -35,7 +38,7 @@ public class SmeupMessageSender
     DefaultRequestHandler iRequester = new DefaultRequestHandler(
                                                                  BotData.BOT_SMEUP_TOKEN);
 
-    protected void startDaemon(final String aBotToken)
+    public void startDaemon(final String aBotToken)
     {
         final String vBotToken=(aBotToken!=null && !"".equalsIgnoreCase(aBotToken)?aBotToken:BotData.BOT_SMEUP_TOKEN);
         final Runnable vNotifier = new Runnable()

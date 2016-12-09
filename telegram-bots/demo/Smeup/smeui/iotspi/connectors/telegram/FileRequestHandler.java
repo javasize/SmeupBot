@@ -7,7 +7,7 @@
  * or implied. Any use is at your own risk.
  *
  */
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram;
 
 import java.io.BufferedReader;
 import java.io.IOException;

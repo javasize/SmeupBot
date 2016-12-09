@@ -1,4 +1,4 @@
-package jtelebotcore.main;
+package Smeup.smeui.iotspi.connectors.telegram.utility;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,6 +15,7 @@ import java.util.Iterator;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
+import Smeup.smeui.iotspi.connectors.telegram.command.SmeupCommand;
 import Smeup.smeui.loa39.utility.A39Connection;
 import Smeup.smeui.loa39.utility.UIXmlUtilities;
 
