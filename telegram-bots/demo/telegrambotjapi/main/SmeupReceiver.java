@@ -11,8 +11,8 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 
 import Smeup.smeui.loa39.utility.A39Client;
-import Smeup.smeui.uiutilities.UIXmlUtilities;
-import de.vivistra.telegrambot.client.Bot;
+import Smeup.smeui.loa39.utility.UIXmlUtilities;
+
 import de.vivistra.telegrambot.model.PhotoSize;
 import de.vivistra.telegrambot.model.User;
 import de.vivistra.telegrambot.model.message.Message;
@@ -20,7 +20,6 @@ import de.vivistra.telegrambot.model.message.MessageType;
 import de.vivistra.telegrambot.model.message.TextMessage;
 import de.vivistra.telegrambot.receiver.IReceiverService;
 import de.vivistra.telegrambot.sender.Sender;
-import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
 
 public class SmeupReceiver implements IReceiverService
 {

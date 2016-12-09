@@ -20,19 +20,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
 
-import Smeup.smec_s.utility.StringUtility;
-import Smeup.smeui.loa39.utility.A39Client;
 import Smeup.smeui.loa39.utility.A39Connection;
-import Smeup.smeui.uicommon.uixmlservice.UIXmlProvider;
-import Smeup.smeui.uimainmodule.UIFunInputStructure;
-import Smeup.smeui.uiutilities.UIFunctionDecoder;
-import Smeup.smeui.uiutilities.UIXmlUtilities;
+import Smeup.smeui.loa39.utility.StringUtility;
+import Smeup.smeui.loa39.utility.UIXmlUtilities;
 import config.BotData;
 import config.MessageType;
 import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
@@ -282,8 +278,7 @@ public class SmeupCommand extends AbstractCommand
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>())
-                        : UIXmlProvider.readXml(UIFunInputStructure
-                                    .getFunInputStructure(vFunToCall));
+                        : null;
             if(vConn != null)
             {
                 SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
@@ -606,8 +601,7 @@ public class SmeupCommand extends AbstractCommand
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>())
-                        : UIXmlProvider.readXml(UIFunInputStructure
-                                    .getFunInputStructure(vFunToCall));
+                        : null;
             if(vConn != null)
             {
                 SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
@@ -732,8 +726,7 @@ public class SmeupCommand extends AbstractCommand
                 vXmlResp = vConn != null
                             ? vConn.executeFun(vFunToCall,
                                                new HashMap<String, String>())
-                            : UIXmlProvider.readXml(UIFunInputStructure
-                                        .getFunInputStructure(vFunToCall));
+                            : null;
                 if(vConn != null)
                 {
                     SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
@@ -793,8 +786,7 @@ public class SmeupCommand extends AbstractCommand
                 vXmlResp = vConn != null
                             ? vConn.executeFun(vFunToCall,
                                                new HashMap<String, String>())
-                            : UIXmlProvider.readXml(UIFunInputStructure
-                                        .getFunInputStructure(vFunToCall));
+                            : null;
                 if(vConn != null)
                 {
                     SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
@@ -911,8 +903,7 @@ public class SmeupCommand extends AbstractCommand
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>())
-                        : UIXmlProvider.readXml(UIFunInputStructure
-                                    .getFunInputStructure(vFunToCall));
+                        : null;
             if(vConn != null)
             {
                 SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
@@ -1046,8 +1037,7 @@ public class SmeupCommand extends AbstractCommand
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>())
-                        : UIXmlProvider.readXml(UIFunInputStructure
-                                    .getFunInputStructure(vFunToCall));
+                        : null;
             if(vConn != null)
             {
                 SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
@@ -1165,8 +1155,7 @@ public class SmeupCommand extends AbstractCommand
             String vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>())
-                        : UIXmlProvider.readXml(UIFunInputStructure
-                                    .getFunInputStructure(vFunToCall));
+                        : null;
             if(vConn != null)
             {
                 SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
@@ -1243,8 +1232,7 @@ public class SmeupCommand extends AbstractCommand
             String vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>())
-                        : UIXmlProvider.readXml(UIFunInputStructure
-                                    .getFunInputStructure(vFunToCall));
+                        : null;
             if(vConn != null)
             {
                 SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
@@ -1323,8 +1311,7 @@ public class SmeupCommand extends AbstractCommand
             String vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>())
-                        : UIXmlProvider.readXml(UIFunInputStructure
-                                    .getFunInputStructure(vFunToCall));
+                        : null;
             if(vConn != null)
             {
                 SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
@@ -1406,8 +1393,7 @@ public class SmeupCommand extends AbstractCommand
             String vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>())
-                        : UIXmlProvider.readXml(UIFunInputStructure
-                                    .getFunInputStructure(vFunToCall));
+                        : null;
             if(vConn != null)
             {
                 SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
@@ -1491,8 +1477,7 @@ public class SmeupCommand extends AbstractCommand
             String vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>())
-                        : UIXmlProvider.readXml(UIFunInputStructure
-                                    .getFunInputStructure(vFunToCall));
+                        : null;
             if(vConn != null)
             {
                 SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
@@ -1571,8 +1556,7 @@ public class SmeupCommand extends AbstractCommand
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>())
-                        : UIXmlProvider.readXml(UIFunInputStructure
-                                    .getFunInputStructure(vFunToCall));
+                        : null;
             if(vConn != null)
             {
                 SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
@@ -1677,8 +1661,7 @@ public class SmeupCommand extends AbstractCommand
             String vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>())
-                        : UIXmlProvider.readXml(UIFunInputStructure
-                                    .getFunInputStructure(vFunToCall));
+                        : null;
             if(vConn != null)
             {
                 SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
@@ -1738,18 +1721,17 @@ public class SmeupCommand extends AbstractCommand
         }
         else
         {
-            if(UIFunctionDecoder.isValidSyntaxFormat(vFun))
+            if(true)
+//            if(UIFunctionDecoder.isValidSyntaxFormat(vFun))
             {
-                UIFunInputStructure vStruct = UIFunctionDecoder
-                            .getFunInputStructure(vFun);
+//                UIFunInputStructure vStruct = UIFunctionDecoder
+//                            .getFunInputStructure(vFun);
                 A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
                             .checkOut();
                 String vResp = vConn != null
                             ? vConn.executeFun(vFun,
                                                new HashMap<String, String>())
-                            : (vStruct != null
-                                        ? UIXmlProvider.readXml(vStruct)
-                                        : "Funzione non supportata senza supporto A39.");
+                            : null;
                 if(vConn != null)
                 {
                     SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
@@ -2039,7 +2021,7 @@ public class SmeupCommand extends AbstractCommand
         String vRet = null;
         if(aTxt != null)
         {
-            vRet = StringUtility.stringToHTMLString(aTxt, true);
+            vRet = Utility.stringToHTMLString(aTxt, true);
         }
         return vRet;
     }

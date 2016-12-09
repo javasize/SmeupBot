@@ -8,7 +8,11 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import Smeup.smec_s.utility.Chronograph;
+import Smeup.smeui.iotspi.datastructure.interfaces.SezInterface;
+import Smeup.smeui.iotspi.datastructure.iotconnector.IoTConnectorConf;
+import Smeup.smeui.iotspi.datastructure.iotconnector.IoTConnectorInput;
+import Smeup.smeui.iotspi.datastructure.iotconnector.IoTConnectorResponse;
+import Smeup.smeui.iotspi.interaction.SPIIoTConnectorAdapter;
 import config.BotData;
 import io.github.nixtabyte.telegram.jtelebot.client.impl.DefaultRequestHandler;
 import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;
@@ -31,12 +35,9 @@ public class SmeupMessageSender
     DefaultRequestHandler iRequester = new DefaultRequestHandler(
                                                                  BotData.BOT_SMEUP_TOKEN);
 
-    public SmeupMessageSender()
+    protected void startDaemon(final String aBotToken)
     {
-    }
-
-    public void init()
-    {
+        final String vBotToken=(aBotToken!=null && !"".equalsIgnoreCase(aBotToken)?aBotToken:BotData.BOT_SMEUP_TOKEN);
         final Runnable vNotifier = new Runnable()
         {
             public void run()
@@ -56,7 +57,7 @@ public class SmeupMessageSender
                 long vDelta= vNowTimeDelta-TIME_TO_SEND_DELTA;
                 if(true || (vDelta>0 && vDelta<(3600*1000)+1))
                 {
-                    ArrayList<String[]> vList= Utility.getNotificationList(BotData.BOT_SMEUP_TOKEN);
+                    ArrayList<String[]> vList= Utility.getNotificationList(vBotToken);
                     if(vList!=null)
                     {
                         Iterator<String[]> vIter= vList.iterator();
@@ -71,7 +72,11 @@ public class SmeupMessageSender
                                 String vText= vStrings.length>3? vStrings[3]:"";
                                 if(vText!=null && !"".equalsIgnoreCase(vText)&& vID>0)
                                 {
-                                    sendText(vText, vFirstName, vLastName, vID);
+                                    TelegramResponse<?> vResp= sendText(vText, vFirstName, vLastName, vID);
+                                    System.out.println("Success: "+vResp.isSuccessful());
+                                    System.out.println("Description: "+vResp.getDescription());
+                                    System.out.println("ErrorCode: "+vResp.getErrorCode());
+
                                 }
                             }
                             catch(NumberFormatException vEx)
@@ -96,7 +101,7 @@ public class SmeupMessageSender
 //        }, 60*60*60, TimeUnit.SECONDS);
     }
 
-    public void sendText(String aText, String aFirstName, String aLastName, long aChatID)
+    public TelegramResponse<?> sendText(String aText, String aFirstName, String aLastName, long aChatID)
     {
         StartReplyKeyboardMarkup keyboard = new StartReplyKeyboardMarkup();
 //        keyboard.setHideKeyboard(true);
@@ -121,24 +126,39 @@ public class SmeupMessageSender
             // TODO Auto-generated catch block
             ex.printStackTrace();
         }
-        System.out.println(jsonResponse);
+        return jsonResponse;
+    }
+
+    public TelegramResponse<?> sendRawText(String aText, String aFirstName, String aLastName, long aChatID)
+    {
+        StartReplyKeyboardMarkup keyboard = new StartReplyKeyboardMarkup();
+//        keyboard.setHideKeyboard(true);
+        keyboard.setSelective(false);
+        TelegramResponse<?> jsonResponse = null;
+        try
+        {
+            System.out.println("Invio "+aText+" a "+aFirstName+" "+aLastName);
+            jsonResponse = iRequester.sendRequest(TelegramRequestFactory
+                                                  .createSendMessageRequest(aChatID, aText, true, null,
+                                                                            null));
+            System.out.println(jsonResponse);
+        }
+        catch(JsonParsingException ex)
+        {
+            // TODO Auto-generated catch block
+            ex.printStackTrace();
+        }
+        catch(TelegramServerException ex)
+        {
+            // TODO Auto-generated catch block
+            ex.printStackTrace();
+        }
+        return jsonResponse;
     }
 
     public static void main(String[] args)
     {
-//        GregorianCalendar vHeightOClockCal= new GregorianCalendar();
-//        vHeightOClockCal.set(GregorianCalendar.HOUR_OF_DAY, 8);
-//        vHeightOClockCal.set(GregorianCalendar.MINUTE, 0);
-//        long vHeightOClockTime= vHeightOClockCal.getTimeInMillis();
-//
-//        GregorianCalendar vMidnightCal= new GregorianCalendar();
-//        vMidnightCal.set(GregorianCalendar.HOUR_OF_DAY, 0);
-//        vMidnightCal.set(GregorianCalendar.MINUTE, 0);
-//        long vNowTime= vMidnightCal.getTimeInMillis();
-//        
-//        System.out.println(vHeightOClockTime);
-//        System.out.println(vNowTime);
-//        System.err.println(vHeightOClockTime-vNowTime);
-        new SmeupMessageSender().init();
+        new SmeupMessageSender().startDaemon(BotData.BOT_SMEUP_TOKEN);
     }
+
 }
