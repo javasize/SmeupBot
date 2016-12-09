@@ -25,7 +25,7 @@ public class SmeupMessageSender
     public static long TIME_TO_SEND_DELTA= 8*60*60*1000+30*60*1000;
     
     private static long ID_MAGNI= 247836496;
-    private static long ID_IO= 199971507;
+    protected static long ID_IO= 199971507;
     private static long ID_DARIO= 219217733;
     private static long ID_MORELLI= 125377266;
     private static long ID_GAGLIARDO= 41720880;    

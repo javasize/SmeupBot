@@ -114,7 +114,7 @@ public class SmeupTelegramSpiPlugin extends SPIIoTConnectorAdapter
         vInput.addData("Text", "Ciao " + System.currentTimeMillis());
         vInput.addData("FirstName", "Oliviero");
         vInput.addData("LastName", "Maestrelli");
-        vInput.addData("ChatId", "199971507");
+        vInput.addData("ChatId", ""+SmeupMessageSender.ID_IO);
         IoTConnectorResponse vResp = vPlugin.invoke(vInput);
         if(vResp != null)
         {
@@ -128,5 +128,4 @@ public class SmeupTelegramSpiPlugin extends SPIIoTConnectorAdapter
             }
         }
     }
-
 }

@@ -46,10 +46,6 @@ import io.github.nixtabyte.telegram.jtelebot.server.impl.AbstractCommand;
 public class SmeupCommand extends AbstractCommand
 {
 
-    // Long ENABLED_ID = new Long(199971507);
-    // Long ENABLED_ID_2 = new Long(219217733);
-    // static String[][] LOADED_ENABLED_USER= new String[][] {};
-
     String[][] DEFAULT_ENABLED_USER = new String[][] {
                 { "Oliviero", "Maestrelli" },
                 { "Dario", "Foresti" }, { "Silvano", "Lancini" },
