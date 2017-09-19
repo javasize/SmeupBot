@@ -11,12 +11,11 @@ package Smeup.smeui.iotspi.connectors.telegram.keyboard;
 
 import java.util.Arrays;
 
-import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboard;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.github.nixtabyte.telegram.jtelebot.response.json.ReplyKeyboardMarkup;
+import io.github.nixtabyte.telegram.jtelebot.response.json.CustomReplyKeyboard;
 
 /**
 *
