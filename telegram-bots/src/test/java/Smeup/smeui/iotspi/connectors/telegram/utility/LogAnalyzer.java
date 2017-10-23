@@ -86,7 +86,7 @@ public class LogAnalyzer
         return vRet;
     }
     
-    public static void geterateLogReport(String aFileName, ArrayList<String> aContent, File aReportFile) throws IOException
+    public static void generateLogReport(String aFileName, ArrayList<String> aContent, File aReportFile) throws IOException
     {
         
         FileWriter vWriter= new FileWriter(aReportFile, true);
@@ -132,7 +132,7 @@ public class LogAnalyzer
             {
                 String vName= vKeyList.get(vI);
                 ArrayList<String> vList= vMap.get(vName);
-                geterateLogReport(vName, vList, vOut);
+                generateLogReport(vName, vList, vOut);
                 
             }
         }

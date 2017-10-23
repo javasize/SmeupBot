@@ -29,7 +29,7 @@ public class SmeupTelegramSpiPlugin extends SPIIoTConnectorAdapter implements Sm
     private IoTConnectorConf iConf = null;
 
     @Override
-    public boolean init(SezInterface aSez, IoTConnectorConf aConfiguration)
+    public boolean postInit(SezInterface aSez, IoTConnectorConf aConfiguration)
     {
         iSez = aSez;
         iConf = aConfiguration;
