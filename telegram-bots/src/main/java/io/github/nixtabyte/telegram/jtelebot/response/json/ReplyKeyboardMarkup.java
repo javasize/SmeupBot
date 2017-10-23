@@ -7,16 +7,12 @@
  * or implied. Any use is at your own risk.
  *
  */
-package Smeup.smeui.iotspi.connectors.telegram.keyboard;
+package io.github.nixtabyte.telegram.jtelebot.response.json;
 
 import java.util.Arrays;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import io.github.nixtabyte.telegram.jtelebot.response.json.ReplyKeyboardMarkup;
-import io.github.nixtabyte.telegram.jtelebot.response.json.CustomReplyKeyboard;
-
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 /**
 *
 * ReplyKeyboardMarkup
@@ -24,14 +20,13 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.CustomReplyKeyboard;
 * @since 0.0.1
 */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CiaoReplyKeyboardMarkup extends ReplyKeyboardMarkup{
+public class ReplyKeyboardMarkup implements CustomReplyKeyboard{
 
 	/**
 	 * Array of button rows, each represented by an Array of Strings
 	 * */
 	@JsonProperty("keyboard")
-    private String[][] keyboard= new String[][] {{"Agende"}, {"Sentinelle"}, {"Commesse"}, {"Indici"}};
-//    private String[][] keyboard= new String[][] {{"Agende"}, {"Sentinelle"}, {"Commesse"}};
+	private String[][] keyboard;
 
 	/**
 	 * Optional. Requests clients to resize the keyboard vertically for optimal
@@ -40,14 +35,14 @@ public class CiaoReplyKeyboardMarkup extends ReplyKeyboardMarkup{
 	 * of the same height as the app's standard keyboard.
 	 * */
 	@JsonProperty("resize_keyboard")
-	private Boolean resizeKeyboard=true;
+	private Boolean resizeKeyboard;
 
 	/**
 	 * Optional. Requests clients to hide the keyboard as soon as it's been
 	 * used. Defaults to false.
 	 * */
 	@JsonProperty("one_time_keyboard")
-	private Boolean oneTimeKeyboard=true;
+	private Boolean oneTimeKeyboard;
 
 	/**
 	 * Optional. Use this parameter if you want to show the keyboard to specific
@@ -60,19 +55,10 @@ public class CiaoReplyKeyboardMarkup extends ReplyKeyboardMarkup{
 	 * group don???????????????????????????t see the keyboard.
 	 * */
 	@JsonProperty("selective")
-	private Boolean selective=true;
+	private Boolean selective;
 
 	public String[][] getKeyboard() {
-	    String[][] vKeyboard= keyboard;
-//	    for( int vI = 0; vI < vKeyboard.length; vI++)
-//        {
-//	        String[] vRow= vKeyboard[vI];
-//            for( int vI2 = 0; vI2 < vRow.length; vI2++)
-//            {
-//                vKeyboard[vI][vI2]= MessageFormat.format(vKeyboard[vI][vI2], iCod);
-//            }
-//        };
-		return vKeyboard;
+		return keyboard;
 	}
 
 	public void setKeyboard(final String[][] keyboard) {
@@ -166,7 +152,7 @@ public class CiaoReplyKeyboardMarkup extends ReplyKeyboardMarkup{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CiaoReplyKeyboardMarkup other = (CiaoReplyKeyboardMarkup) obj;
+		ReplyKeyboardMarkup other = (ReplyKeyboardMarkup) obj;
 		if (!Arrays.deepEquals(keyboard, other.keyboard))
 			return false;
 		if (oneTimeKeyboard == null) {
