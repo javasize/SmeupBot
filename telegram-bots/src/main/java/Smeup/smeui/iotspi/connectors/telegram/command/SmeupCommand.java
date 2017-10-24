@@ -268,7 +268,6 @@ public class SmeupCommand extends AbstractCommand
                         .format(Calendar.getInstance().getTime());
             String vOggi = new SimpleDateFormat("dd/MM/yyyy")
                         .format(Calendar.getInstance().getTime());
-
             
             String vXmlResp;
             String vFunToCall = MessageFormat.format(FUN_AGE_DAY,
@@ -284,6 +283,7 @@ public class SmeupCommand extends AbstractCommand
                 SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
             }
             String vName = "";
+            String vCodCommessa = "";
             String vDescCommessa = "";
             String vOre = "";
             String vFilePath = vTempDir + "\\resp"
@@ -314,6 +314,8 @@ public class SmeupCommand extends AbstractCommand
                             String[] vSplit = vFld.split("\\|");
                             vName = (vSplit.length > 10
                                         ? vSplit[10]: "");
+                            vCodCommessa= (vSplit.length > 14
+                                        ? vSplit[14]: "");
                             vDescCommessa = (vSplit.length > 16
                                         ? vSplit[16]: "");
                             vOre = (vSplit.length > 25
@@ -321,7 +323,7 @@ public class SmeupCommand extends AbstractCommand
                             if(vName.equalsIgnoreCase(new String(vLastName+" "+vFirstName).toUpperCase()))
                             {
                                 String vA39Row = "<b>"
-                                            + vName + "</b>"
+                                            + vCodCommessa + "</b>"
                                             + "\t" + vDescCommessa
                                             + "\t" + vOre;
                                 vResp += "\r\n".concat(vA39Row);
@@ -331,15 +333,18 @@ public class SmeupCommand extends AbstractCommand
                 }
             }
             
-            String vRespText = "Ciao " + vFirstName + " "
+            String vRespText = new String("Ciao " + vFirstName + " "
                         + vLastName
-                        + ". Oggi è il "+vOggi+", e la tua agenda prevede\r\n"
+                        + ". Oggi e' il "+vOggi+", e la tua agenda prevede\r\n"
                         + (vResp != null
                                     ? (vResp.length() > 4096
                                                 ? vResp.substring(0,
                                                                   4096)
                                                 : vResp)
-                                    : "Risposta nulla");
+                                    : "Risposta nulla")
+                        + "\r\nPer aggiungere/eliminare ore digita:\r\n"
+                        + "+/- [ORE] [CODICE-COMMESSA] [BREVE NOTA]");
+            
             try
             {
                 vRespMsg = new String(vRespText.getBytes(),
@@ -351,6 +356,101 @@ public class SmeupCommand extends AbstractCommand
                 ex.printStackTrace();
             }
             
+        }
+        else if(vFun.toUpperCase().startsWith("+") || vFun.toUpperCase().startsWith("-") && (vFun.length()>1 && (" ".equalsIgnoreCase(vFun.substring(1,2))) || Character.isDigit(vFun.charAt(1))))
+        {
+            String vDateNow = new SimpleDateFormat("yyyyMMdd")
+                        .format(Calendar.getInstance().getTime());
+            String vDateNowYear = new SimpleDateFormat("yyyy")
+                        .format(Calendar.getInstance().getTime());
+            String vDateNowYearMonth = new SimpleDateFormat("yyyyMM")
+                        .format(Calendar.getInstance().getTime());
+            String vDateNowMonth = new SimpleDateFormat("MM")
+                        .format(Calendar.getInstance().getTime());
+            String vOggi = new SimpleDateFormat("dd/MM/yyyy")
+                        .format(Calendar.getInstance().getTime());
+            
+            String vXmlResp;
+
+            String vFunToCall = MessageFormat.format(FUN_AGE_DAY,
+                                                     vDateNow);
+            A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM
+                        .checkOut();
+            vXmlResp = vConn != null
+                        ? vConn.executeFun(vFunToCall,
+                                           new HashMap<String, String>())
+                        : null;
+            if(vConn != null)
+            {
+                SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+            }
+            String vName = "";
+            String vCodCommessa = "";
+            String vDescCommessa = "";
+            String vOre = "";
+            String vFilePath = vTempDir + "\\resp"
+                        + System.currentTimeMillis() + ".xml";
+            Document vDoc = UIXmlUtilities
+                        .buildDocumentFromXmlString(vXmlResp);
+            String vResp="";
+
+            if(vDoc != null)
+            {
+                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
+                                                        vFilePath);
+                Element vRoot = vDoc.getRootElement();
+                Element vRigheEl = (vRoot != null
+                            ? vRoot.element("Righe"): null);
+                if(vRigheEl != null)
+                {
+                    ArrayList<Element> vList = new ArrayList(
+                                vRigheEl.elements("Riga"));
+                    Iterator<Element> vElIter = vList.iterator();
+                    while(vElIter.hasNext())
+                    {
+                        Element vElement = (Element) vElIter.next();
+                        String vFld = vElement.attributeValue("Fld",
+                                                              "");
+                        if(vFld.indexOf("|") > -1)
+                        {
+                            String[] vSplit = vFld.split("\\|");
+                            vName = (vSplit.length > 10
+                                        ? vSplit[10]: "");
+                            vCodCommessa = (vSplit.length > 14
+                                        ? vSplit[14]: "");
+                            vDescCommessa = (vSplit.length > 16
+                                        ? vSplit[16]: "");
+                            vOre = (vSplit.length > 25
+                                        ? vSplit[25]: "");
+                            if(vName.equalsIgnoreCase(new String(vLastName+" "+vFirstName).toUpperCase()))
+                            {
+                                String vA39Row = "<b>"
+                                            + vCodCommessa + "</b>"
+                                            + "\t" + vDescCommessa
+                                            + "\t" + vOre;
+                                vResp += "\r\n".concat(vA39Row);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+            String vRespText = "Grazie " + vFirstName + " "
+                        + vLastName
+                        + ". Hai modificato l'agenda. La nuova situazione e' la seguente:\r\n" 
+                        + vResp;
+            
+            try
+            {
+                vRespMsg = new String(vRespText.getBytes(),
+                            "UTF-8");
+            }
+            catch(UnsupportedEncodingException ex)
+            {
+                // TODO Auto-generated catch block
+                ex.printStackTrace();
+            }            
         }
         else if(vFun.toUpperCase().startsWith("SENTINELLE"))
         {
