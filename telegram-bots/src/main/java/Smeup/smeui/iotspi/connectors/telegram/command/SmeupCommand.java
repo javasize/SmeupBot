@@ -272,7 +272,7 @@ public class SmeupCommand extends AbstractCommand
             String vXmlResp;
             String vFunToCall = MessageFormat.format(FUN_AGE_DAY,
                                                      vDateNow);
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM
+            A39Connection vConn = SmeupConnectors.CLIENT_A39
                         .checkOut();
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
@@ -280,7 +280,7 @@ public class SmeupCommand extends AbstractCommand
                         : null;
             if(vConn != null)
             {
-                SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+                SmeupConnectors.CLIENT_A39.checkIn(vConn);
             }
             String vName = "";
             String vCodCommessa = "";
@@ -374,7 +374,7 @@ public class SmeupCommand extends AbstractCommand
 
             String vFunToCall = MessageFormat.format(FUN_AGE_DAY,
                                                      vDateNow);
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM
+            A39Connection vConn = SmeupConnectors.CLIENT_A39
                         .checkOut();
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
@@ -382,7 +382,7 @@ public class SmeupCommand extends AbstractCommand
                         : null;
             if(vConn != null)
             {
-                SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+                SmeupConnectors.CLIENT_A39.checkIn(vConn);
             }
             String vName = "";
             String vCodCommessa = "";
@@ -475,7 +475,7 @@ public class SmeupCommand extends AbstractCommand
                                                                  + "01",
                                                      vDateNowYearMonth);
             String vXmlResp;
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM
+            A39Connection vConn = SmeupConnectors.CLIENT_A39
                         .checkOut();
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
@@ -483,7 +483,7 @@ public class SmeupCommand extends AbstractCommand
                         : null;
             if(vConn != null)
             {
-                SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+                SmeupConnectors.CLIENT_A39.checkIn(vConn);
             }
             String vDay = "";
             String vDate = "";
@@ -798,7 +798,7 @@ public class SmeupCommand extends AbstractCommand
             }
             String vFunToCall = FUN_AGE;
             String vXmlResp;
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM
+            A39Connection vConn = SmeupConnectors.CLIENT_A39
                         .checkOut();
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
@@ -806,7 +806,7 @@ public class SmeupCommand extends AbstractCommand
                         : null;
             if(vConn != null)
             {
-                SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+                SmeupConnectors.CLIENT_A39.checkIn(vConn);
             }
             String vCodCol = "";
             String vDescCol = "";
@@ -923,7 +923,7 @@ public class SmeupCommand extends AbstractCommand
                 String vFunToCall = MessageFormat.format(FUN_AGE_DAY,
                                                          vDateNow);
                 String vXmlResp;
-                A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM
+                A39Connection vConn = SmeupConnectors.CLIENT_A39
                             .checkOut();
                 vXmlResp = vConn != null
                             ? vConn.executeFun(vFunToCall,
@@ -931,7 +931,7 @@ public class SmeupCommand extends AbstractCommand
                             : null;
                 if(vConn != null)
                 {
-                    SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+                    SmeupConnectors.CLIENT_A39.checkIn(vConn);
                 }
                 String vName = "";
                 String vDescCommessa = "";
@@ -983,7 +983,7 @@ public class SmeupCommand extends AbstractCommand
                                                          vCodiceAgenda,
                                                          vDateNow);
                 String vXmlResp;
-                A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM
+                A39Connection vConn = SmeupConnectors.CLIENT_A39
                             .checkOut();
                 vXmlResp = vConn != null
                             ? vConn.executeFun(vFunToCall,
@@ -991,7 +991,7 @@ public class SmeupCommand extends AbstractCommand
                             : null;
                 if(vConn != null)
                 {
-                    SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+                    SmeupConnectors.CLIENT_A39.checkIn(vConn);
                 }
                 String vDate = "";
                 String vDescCommessa = "";
@@ -1100,7 +1100,7 @@ public class SmeupCommand extends AbstractCommand
                                                      vDateNow);
 
             String vXmlResp;
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM
+            A39Connection vConn = SmeupConnectors.CLIENT_A39
                         .checkOut();
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
@@ -1108,7 +1108,7 @@ public class SmeupCommand extends AbstractCommand
                         : null;
             if(vConn != null)
             {
-                SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+                SmeupConnectors.CLIENT_A39.checkIn(vConn);
             }
             String vCodCol = "";
             String vCodCommessa = "";
@@ -1234,7 +1234,7 @@ public class SmeupCommand extends AbstractCommand
             String vFunToCall = MessageFormat.format(FUN_IND_DAY,
                                                      vDateString);
             String vXmlResp;
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM
+            A39Connection vConn = SmeupConnectors.CLIENT_A39
                         .checkOut();
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
@@ -1242,7 +1242,7 @@ public class SmeupCommand extends AbstractCommand
                         : null;
             if(vConn != null)
             {
-                SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+                SmeupConnectors.CLIENT_A39.checkIn(vConn);
             }
             String vFilePath = vTempDir + "\\resp"
                         + System.currentTimeMillis() + ".xml";
@@ -1348,412 +1348,412 @@ public class SmeupCommand extends AbstractCommand
                 }
             }
         }
-        else if(("CLIENTI").equalsIgnoreCase(vFun))
-        {
-            String vResp = "";
-            String vFunToCall = FUN_CLI;
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
-                        .checkOut();
-            String vXmlResp = vConn != null
-                        ? vConn.executeFun(vFunToCall,
-                                           new HashMap<String, String>())
-                        : null;
-            if(vConn != null)
-            {
-                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
-            }
-            String vFilePath = vTempDir + "\\resp"
-                        + System.currentTimeMillis() + ".xml";
-            Document vDoc = UIXmlUtilities
-                        .buildDocumentFromXmlString(vXmlResp);
-            if(vDoc != null)
-            {
-                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
-                                                        vFilePath);
-                Element vRoot = vDoc.getRootElement();
-                Element vRigheEl = (vRoot != null
-                            ? vRoot.element("Righe"): null);
-                if(vRigheEl != null)
-                {
-                    ArrayList<Element> vList = new ArrayList(
-                                vRigheEl.elements("Riga"));
-                    Iterator<Element> vElIter = vList.iterator();
-                    while(vElIter.hasNext()
-                                && vResp.length() < 4000)
-                    {
-                        Element vElement = (Element) vElIter.next();
-                        String vFld = vElement.attributeValue("Fld",
-                                                              "");
-                        if(vFld.indexOf("|") > -1)
-                        {
-                            String[] vSplit = vFld.split("\\|");
-                            String vCod = vSplit.length > 5
-                                        ? vSplit[5]: "";
-                            String vDesc = getHtmlEncodedString(vSplit.length > 6
-                                        ? vSplit[6]: "");
-                            String vA39Row = vCod + "\t" + "<b>"
-                                        + vDesc + "</b>"
-                                        + "\t" + "/CLIENTE_" + vCod
-                                        + " /INDIRIZZO_CLIENTE_"
-                                        + vCod;
-                            vResp += "\r\n".concat(vA39Row);
-                        }
-                    }
-                }
-            }
-            String vRespText = "Ciao " + vFirstName + " "
-                        + vLastName
-                        + ". Ecco quello che hai chiesto: "
-                        + (vResp != null
-                                    ? (vResp.length() > 4096
-                                                ? vResp.substring(0,
-                                                                  4096)
-                                                : vResp)
-                                    : "Risposta nulla");
-            try
-            {
-                vRespMsg = new String(vRespText.getBytes(),
-                            "UTF-8");
-            }
-            catch(UnsupportedEncodingException ex)
-            {
-                // TODO Auto-generated catch block
-                ex.printStackTrace();
-            }
-
-        }
-        else if(((vFun).startsWith("CLIENTE ")
-                    || (vFun).startsWith("CLIENTE_")))
-        {
-            String vResp = "";
-            String vCod = vFun.substring(("CLIENTE ").length());
-            String vFunToCall = MessageFormat.format(FUN_CLI_DAT, vCod);
-
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
-                        .checkOut();
-            String vXmlResp = vConn != null
-                        ? vConn.executeFun(vFunToCall,
-                                           new HashMap<String, String>())
-                        : null;
-            if(vConn != null)
-            {
-                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
-            }
-            String vFilePath = vTempDir + "\\resp"
-                        + System.currentTimeMillis() + ".xml";
-            Document vDoc = UIXmlUtilities
-                        .buildDocumentFromXmlString(vXmlResp);
-            if(vDoc != null)
-            {
-                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
-                                                        vFilePath);
-                Element vRoot = vDoc.getRootElement();
-                Element vRigheEl = (vRoot != null
-                            ? vRoot.element("Righe"): null);
-                if(vRigheEl != null)
-                {
-                    ArrayList<Element> vList = new ArrayList(
-                                vRigheEl.elements("Riga"));
-                    Iterator<Element> vElIter = vList.iterator();
-                    while(vElIter.hasNext()
-                                && vResp.length() < 4000)
-                    {
-                        Element vElement = (Element) vElIter.next();
-                        String vFld = vElement.attributeValue("Fld",
-                                                              "");
-                        if(vFld.indexOf("|") > -1)
-                        {
-                            String[] vSplit = vFld.split("\\|");
-                            String vA39Row = "<b>" + vSplit[1]
-                                        + "</b>" + "\t"
-                                        + "<i>" + vSplit[2]
-                                        + "</i>";
-                            vResp += "\r\n".concat(vA39Row);
-                        }
-                    }
-                }
-            }
-            String vRespText = "Ciao " + vFirstName + " "
-                        + vLastName
-                        + ". Ecco quello che hai chiesto: "
-                        + (vResp != null
-                                    ? (vResp.length() > 4096
-                                                ? vResp.substring(0,
-                                                                  4096)
-                                                : vResp)
-                                    : "Risposta nulla");
-            try
-            {
-                vRespMsg = new String(vRespText.getBytes(),
-                            "UTF-8");
-            }
-            catch(UnsupportedEncodingException ex)
-            {
-                // TODO Auto-generated catch block
-                ex.printStackTrace();
-            }
-            if(!aIsNotification)
-            {
-                vKeyboardMarkup = new ClienteReplyKeyboardMarkup(vCod);
-            }
-        }
-        else if(((vFun).startsWith("INDIRIZZO CLIENTE ")
-                    || (vFun).startsWith("INDIRIZZO_CLIENTE_")))
-        {
-            String vResp = "";
-            String vCod = vFun
-                        .substring(("INDIRIZZO CLIENTE ").length());
-            String vFunToCall = MessageFormat.format(FUN_CLI_ADDR,
-                                                     vCod);
-            // String vFunToCall = "F(EXB;BRK9CN;CRU) 1(CN;CLI;"
-            // + vCod
-            // + ")";
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
-                        .checkOut();
-            String vXmlResp = vConn != null
-                        ? vConn.executeFun(vFunToCall,
-                                           new HashMap<String, String>())
-                        : null;
-            if(vConn != null)
-            {
-                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
-            }
-
-            String vFilePath = vTempDir + "\\resp"
-                        + System.currentTimeMillis() + ".xml";
-            Document vDoc = UIXmlUtilities
-                        .buildDocumentFromXmlString(vXmlResp);
-            if(vDoc != null)
-            {
-                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
-                                                        vFilePath);
-                Element vRoot = vDoc.getRootElement();
-                Element vRigheEl = (vRoot != null
-                            ? vRoot.element("Righe"): null);
-                if(vRigheEl != null)
-                {
-                    ArrayList<Element> vList = new ArrayList(
-                                vRigheEl.elements("Riga"));
-                    Iterator<Element> vElIter = vList.iterator();
-                    while(vElIter.hasNext()
-                                && vResp.length() < 4000)
-                    {
-                        Element vElement = (Element) vElIter.next();
-                        String vFld = vElement.attributeValue("Fld",
-                                                              "");
-                        if(vFld.indexOf("|") > -1)
-                        {
-                            String[] vSplit = vFld.split("\\|");
-                            if("C. INDIRIZZO"
-                                        .equalsIgnoreCase(vSplit[0]))
-                            {
-                                String vA39Row = (vSplit.length > 2
-                                            ? "<b>" + vSplit[2]
-                                                        + "</b>"
-                                            : "")
-                                            + ":\t"
-                                            + (vSplit.length > 5
-                                                        ? "<i>" + vSplit[5]
-                                                                    + "</i>"
-                                                        : "");
-                                vResp += "\r\n".concat(vA39Row);
-                            }
-                        }
-                    }
-                }
-            }
-            String vRespText = "Ciao " + vFirstName + " "
-                        + vLastName
-                        + ". Ecco quello che hai chiesto: "
-                        + (vResp != null
-                                    ? (vResp.length() > 4096
-                                                ? vResp.substring(0,
-                                                                  4096)
-                                                : vResp)
-                                    : "Risposta nulla");
-            try
-            {
-                vRespMsg = new String(vRespText.getBytes(),
-                            "UTF-8");
-            }
-            catch(UnsupportedEncodingException ex)
-            {
-                // TODO Auto-generated catch block
-                ex.printStackTrace();
-            }
-        }
-        else if(((vFun).startsWith("FISCALE CLIENTE ") || (vFun)
-                    .startsWith("FISCALE_CLIENTE_")))
-        {
-            String vResp = "";
-            String vCod = vFun
-                        .substring(("FISCALE CLIENTE ").length());
-            String vFunToCall = MessageFormat.format(FUN_CLI_FISC,
-                                                     vCod);
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
-                        .checkOut();
-            String vXmlResp = vConn != null
-                        ? vConn.executeFun(vFunToCall,
-                                           new HashMap<String, String>())
-                        : null;
-            if(vConn != null)
-            {
-                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
-            }
-
-            String vFilePath = vTempDir + "\\resp"
-                        + System.currentTimeMillis() + ".xml";
-            Document vDoc = UIXmlUtilities
-                        .buildDocumentFromXmlString(vXmlResp);
-            if(vDoc != null)
-            {
-                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
-                                                        vFilePath);
-                Element vRoot = vDoc.getRootElement();
-                Element vRigheEl = (vRoot != null
-                            ? vRoot.element("Righe"): null);
-                if(vRigheEl != null)
-                {
-                    ArrayList<Element> vList = new ArrayList(
-                                vRigheEl.elements("Riga"));
-                    Iterator<Element> vElIter = vList.iterator();
-                    while(vElIter.hasNext()
-                                && vResp.length() < 4000)
-                    {
-                        Element vElement = (Element) vElIter.next();
-                        String vFld = vElement.attributeValue("Fld",
-                                                              "");
-                        if(vFld.indexOf("|") > -1)
-                        {
-                            String[] vSplit = vFld.split("\\|");
-                            if(vSplit[0].toUpperCase()
-                                        .startsWith("F. RIFERIMENTI FISCALI"))
-                            {
-                                String vA39Row = (vSplit.length > 2
-                                            ? "<b>" + vSplit[2]
-                                                        + "</b>"
-                                            : "")
-                                            + ":\t"
-                                            + (vSplit.length > 5
-                                                        ? "<i>" + vSplit[5]
-                                                                    + "</i>"
-                                                        : "");
-                                vResp += "\r\n".concat(vA39Row);
-                            }
-                        }
-                    }
-                }
-            }
-            String vRespText = "Ciao " + vFirstName + " "
-                        + vLastName
-                        + ". Ecco quello che hai chiesto: "
-                        + (vResp != null
-                                    ? (vResp.length() > 4096
-                                                ? vResp.substring(0,
-                                                                  4096)
-                                                : vResp)
-                                    : "Risposta nulla");
-            try
-            {
-                vRespMsg = new String(vRespText.getBytes(),
-                            "UTF-8");
-            }
-            catch(UnsupportedEncodingException ex)
-            {
-                // TODO Auto-generated catch block
-                ex.printStackTrace();
-            }
-
-        }
-        else if(((vFun)
-                    .startsWith("CONTABILE CLIENTE ")
-                    || (vFun).startsWith("CONTABILE_CLIENTE_")))
-        {
-            String vResp = "";
-            String vCod = vFun
-                        .substring(("CONTABILE CLIENTE ").length());
-            String vFunToCall = MessageFormat.format(FUN_CLI_CONT,
-                                                     vCod);
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
-                        .checkOut();
-            String vXmlResp = vConn != null
-                        ? vConn.executeFun(vFunToCall,
-                                           new HashMap<String, String>())
-                        : null;
-            if(vConn != null)
-            {
-                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
-            }
-            String vFilePath = vTempDir + "\\resp"
-                        + System.currentTimeMillis() + ".xml";
-            Document vDoc = UIXmlUtilities
-                        .buildDocumentFromXmlString(vXmlResp);
-            if(vDoc != null)
-            {
-                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
-                                                        vFilePath);
-                Element vRoot = vDoc.getRootElement();
-                Element vRigheEl = (vRoot != null
-                            ? vRoot.element("Righe"): null);
-                if(vRigheEl != null)
-                {
-                    ArrayList<Element> vList = new ArrayList(
-                                vRigheEl.elements("Riga"));
-                    Iterator<Element> vElIter = vList.iterator();
-                    while(vElIter.hasNext())
-                    {
-                        Element vElement = (Element) vElIter.next();
-                        String vFld = vElement.attributeValue("Fld",
-                                                              "");
-                        if(vFld.indexOf("|") > -1)
-                        {
-                            String[] vSplit = vFld.split("\\|");
-                            if(vSplit[0].toUpperCase()
-                                        .startsWith("G. RIFERIMENTI CONTABILI"))
-                            {
-                                String vA39Row = (vSplit.length > 2
-                                            ? "<b>" + vSplit[2]
-                                                        + "</b>"
-                                            : "")
-                                            + ":\t"
-                                            + (vSplit.length > 5
-                                                        ? "<i>" + vSplit[5]
-                                                                    + "</i>"
-                                                        : "");
-                                vResp += "\r\n".concat(vA39Row);
-                            }
-                        }
-                    }
-                }
-            }
-            String vRespText = "Ciao " + vFirstName + " "
-                        + vLastName
-                        + ". Ecco quello che hai chiesto: "
-                        + (vResp != null
-                                    ? (vResp.length() > 4000
-                                                ? vResp.substring(0,
-                                                                  3000)
-                                                : vResp)
-                                    : "Risposta nulla");
-            try
-            {
-                vRespMsg = new String(vRespText.getBytes(),
-                            "UTF-8");
-            }
-            catch(UnsupportedEncodingException ex)
-            {
-                // TODO Auto-generated catch block
-                ex.printStackTrace();
-            }
-
-        }
+//        else if(("CLIENTI").equalsIgnoreCase(vFun))
+//        {
+//            String vResp = "";
+//            String vFunToCall = FUN_CLI;
+//            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
+//                        .checkOut();
+//            String vXmlResp = vConn != null
+//                        ? vConn.executeFun(vFunToCall,
+//                                           new HashMap<String, String>())
+//                        : null;
+//            if(vConn != null)
+//            {
+//                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
+//            }
+//            String vFilePath = vTempDir + "\\resp"
+//                        + System.currentTimeMillis() + ".xml";
+//            Document vDoc = UIXmlUtilities
+//                        .buildDocumentFromXmlString(vXmlResp);
+//            if(vDoc != null)
+//            {
+//                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
+//                                                        vFilePath);
+//                Element vRoot = vDoc.getRootElement();
+//                Element vRigheEl = (vRoot != null
+//                            ? vRoot.element("Righe"): null);
+//                if(vRigheEl != null)
+//                {
+//                    ArrayList<Element> vList = new ArrayList(
+//                                vRigheEl.elements("Riga"));
+//                    Iterator<Element> vElIter = vList.iterator();
+//                    while(vElIter.hasNext()
+//                                && vResp.length() < 4000)
+//                    {
+//                        Element vElement = (Element) vElIter.next();
+//                        String vFld = vElement.attributeValue("Fld",
+//                                                              "");
+//                        if(vFld.indexOf("|") > -1)
+//                        {
+//                            String[] vSplit = vFld.split("\\|");
+//                            String vCod = vSplit.length > 5
+//                                        ? vSplit[5]: "";
+//                            String vDesc = getHtmlEncodedString(vSplit.length > 6
+//                                        ? vSplit[6]: "");
+//                            String vA39Row = vCod + "\t" + "<b>"
+//                                        + vDesc + "</b>"
+//                                        + "\t" + "/CLIENTE_" + vCod
+//                                        + " /INDIRIZZO_CLIENTE_"
+//                                        + vCod;
+//                            vResp += "\r\n".concat(vA39Row);
+//                        }
+//                    }
+//                }
+//            }
+//            String vRespText = "Ciao " + vFirstName + " "
+//                        + vLastName
+//                        + ". Ecco quello che hai chiesto: "
+//                        + (vResp != null
+//                                    ? (vResp.length() > 4096
+//                                                ? vResp.substring(0,
+//                                                                  4096)
+//                                                : vResp)
+//                                    : "Risposta nulla");
+//            try
+//            {
+//                vRespMsg = new String(vRespText.getBytes(),
+//                            "UTF-8");
+//            }
+//            catch(UnsupportedEncodingException ex)
+//            {
+//                // TODO Auto-generated catch block
+//                ex.printStackTrace();
+//            }
+//
+//        }
+//        else if(((vFun).startsWith("CLIENTE ")
+//                    || (vFun).startsWith("CLIENTE_")))
+//        {
+//            String vResp = "";
+//            String vCod = vFun.substring(("CLIENTE ").length());
+//            String vFunToCall = MessageFormat.format(FUN_CLI_DAT, vCod);
+//
+//            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
+//                        .checkOut();
+//            String vXmlResp = vConn != null
+//                        ? vConn.executeFun(vFunToCall,
+//                                           new HashMap<String, String>())
+//                        : null;
+//            if(vConn != null)
+//            {
+//                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
+//            }
+//            String vFilePath = vTempDir + "\\resp"
+//                        + System.currentTimeMillis() + ".xml";
+//            Document vDoc = UIXmlUtilities
+//                        .buildDocumentFromXmlString(vXmlResp);
+//            if(vDoc != null)
+//            {
+//                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
+//                                                        vFilePath);
+//                Element vRoot = vDoc.getRootElement();
+//                Element vRigheEl = (vRoot != null
+//                            ? vRoot.element("Righe"): null);
+//                if(vRigheEl != null)
+//                {
+//                    ArrayList<Element> vList = new ArrayList(
+//                                vRigheEl.elements("Riga"));
+//                    Iterator<Element> vElIter = vList.iterator();
+//                    while(vElIter.hasNext()
+//                                && vResp.length() < 4000)
+//                    {
+//                        Element vElement = (Element) vElIter.next();
+//                        String vFld = vElement.attributeValue("Fld",
+//                                                              "");
+//                        if(vFld.indexOf("|") > -1)
+//                        {
+//                            String[] vSplit = vFld.split("\\|");
+//                            String vA39Row = "<b>" + vSplit[1]
+//                                        + "</b>" + "\t"
+//                                        + "<i>" + vSplit[2]
+//                                        + "</i>";
+//                            vResp += "\r\n".concat(vA39Row);
+//                        }
+//                    }
+//                }
+//            }
+//            String vRespText = "Ciao " + vFirstName + " "
+//                        + vLastName
+//                        + ". Ecco quello che hai chiesto: "
+//                        + (vResp != null
+//                                    ? (vResp.length() > 4096
+//                                                ? vResp.substring(0,
+//                                                                  4096)
+//                                                : vResp)
+//                                    : "Risposta nulla");
+//            try
+//            {
+//                vRespMsg = new String(vRespText.getBytes(),
+//                            "UTF-8");
+//            }
+//            catch(UnsupportedEncodingException ex)
+//            {
+//                // TODO Auto-generated catch block
+//                ex.printStackTrace();
+//            }
+//            if(!aIsNotification)
+//            {
+//                vKeyboardMarkup = new ClienteReplyKeyboardMarkup(vCod);
+//            }
+//        }
+//        else if(((vFun).startsWith("INDIRIZZO CLIENTE ")
+//                    || (vFun).startsWith("INDIRIZZO_CLIENTE_")))
+//        {
+//            String vResp = "";
+//            String vCod = vFun
+//                        .substring(("INDIRIZZO CLIENTE ").length());
+//            String vFunToCall = MessageFormat.format(FUN_CLI_ADDR,
+//                                                     vCod);
+//            // String vFunToCall = "F(EXB;BRK9CN;CRU) 1(CN;CLI;"
+//            // + vCod
+//            // + ")";
+//            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
+//                        .checkOut();
+//            String vXmlResp = vConn != null
+//                        ? vConn.executeFun(vFunToCall,
+//                                           new HashMap<String, String>())
+//                        : null;
+//            if(vConn != null)
+//            {
+//                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
+//            }
+//
+//            String vFilePath = vTempDir + "\\resp"
+//                        + System.currentTimeMillis() + ".xml";
+//            Document vDoc = UIXmlUtilities
+//                        .buildDocumentFromXmlString(vXmlResp);
+//            if(vDoc != null)
+//            {
+//                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
+//                                                        vFilePath);
+//                Element vRoot = vDoc.getRootElement();
+//                Element vRigheEl = (vRoot != null
+//                            ? vRoot.element("Righe"): null);
+//                if(vRigheEl != null)
+//                {
+//                    ArrayList<Element> vList = new ArrayList(
+//                                vRigheEl.elements("Riga"));
+//                    Iterator<Element> vElIter = vList.iterator();
+//                    while(vElIter.hasNext()
+//                                && vResp.length() < 4000)
+//                    {
+//                        Element vElement = (Element) vElIter.next();
+//                        String vFld = vElement.attributeValue("Fld",
+//                                                              "");
+//                        if(vFld.indexOf("|") > -1)
+//                        {
+//                            String[] vSplit = vFld.split("\\|");
+//                            if("C. INDIRIZZO"
+//                                        .equalsIgnoreCase(vSplit[0]))
+//                            {
+//                                String vA39Row = (vSplit.length > 2
+//                                            ? "<b>" + vSplit[2]
+//                                                        + "</b>"
+//                                            : "")
+//                                            + ":\t"
+//                                            + (vSplit.length > 5
+//                                                        ? "<i>" + vSplit[5]
+//                                                                    + "</i>"
+//                                                        : "");
+//                                vResp += "\r\n".concat(vA39Row);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            String vRespText = "Ciao " + vFirstName + " "
+//                        + vLastName
+//                        + ". Ecco quello che hai chiesto: "
+//                        + (vResp != null
+//                                    ? (vResp.length() > 4096
+//                                                ? vResp.substring(0,
+//                                                                  4096)
+//                                                : vResp)
+//                                    : "Risposta nulla");
+//            try
+//            {
+//                vRespMsg = new String(vRespText.getBytes(),
+//                            "UTF-8");
+//            }
+//            catch(UnsupportedEncodingException ex)
+//            {
+//                // TODO Auto-generated catch block
+//                ex.printStackTrace();
+//            }
+//        }
+//        else if(((vFun).startsWith("FISCALE CLIENTE ") || (vFun)
+//                    .startsWith("FISCALE_CLIENTE_")))
+//        {
+//            String vResp = "";
+//            String vCod = vFun
+//                        .substring(("FISCALE CLIENTE ").length());
+//            String vFunToCall = MessageFormat.format(FUN_CLI_FISC,
+//                                                     vCod);
+//            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
+//                        .checkOut();
+//            String vXmlResp = vConn != null
+//                        ? vConn.executeFun(vFunToCall,
+//                                           new HashMap<String, String>())
+//                        : null;
+//            if(vConn != null)
+//            {
+//                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
+//            }
+//
+//            String vFilePath = vTempDir + "\\resp"
+//                        + System.currentTimeMillis() + ".xml";
+//            Document vDoc = UIXmlUtilities
+//                        .buildDocumentFromXmlString(vXmlResp);
+//            if(vDoc != null)
+//            {
+//                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
+//                                                        vFilePath);
+//                Element vRoot = vDoc.getRootElement();
+//                Element vRigheEl = (vRoot != null
+//                            ? vRoot.element("Righe"): null);
+//                if(vRigheEl != null)
+//                {
+//                    ArrayList<Element> vList = new ArrayList(
+//                                vRigheEl.elements("Riga"));
+//                    Iterator<Element> vElIter = vList.iterator();
+//                    while(vElIter.hasNext()
+//                                && vResp.length() < 4000)
+//                    {
+//                        Element vElement = (Element) vElIter.next();
+//                        String vFld = vElement.attributeValue("Fld",
+//                                                              "");
+//                        if(vFld.indexOf("|") > -1)
+//                        {
+//                            String[] vSplit = vFld.split("\\|");
+//                            if(vSplit[0].toUpperCase()
+//                                        .startsWith("F. RIFERIMENTI FISCALI"))
+//                            {
+//                                String vA39Row = (vSplit.length > 2
+//                                            ? "<b>" + vSplit[2]
+//                                                        + "</b>"
+//                                            : "")
+//                                            + ":\t"
+//                                            + (vSplit.length > 5
+//                                                        ? "<i>" + vSplit[5]
+//                                                                    + "</i>"
+//                                                        : "");
+//                                vResp += "\r\n".concat(vA39Row);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            String vRespText = "Ciao " + vFirstName + " "
+//                        + vLastName
+//                        + ". Ecco quello che hai chiesto: "
+//                        + (vResp != null
+//                                    ? (vResp.length() > 4096
+//                                                ? vResp.substring(0,
+//                                                                  4096)
+//                                                : vResp)
+//                                    : "Risposta nulla");
+//            try
+//            {
+//                vRespMsg = new String(vRespText.getBytes(),
+//                            "UTF-8");
+//            }
+//            catch(UnsupportedEncodingException ex)
+//            {
+//                // TODO Auto-generated catch block
+//                ex.printStackTrace();
+//            }
+//
+//        }
+//        else if(((vFun)
+//                    .startsWith("CONTABILE CLIENTE ")
+//                    || (vFun).startsWith("CONTABILE_CLIENTE_")))
+//        {
+//            String vResp = "";
+//            String vCod = vFun
+//                        .substring(("CONTABILE CLIENTE ").length());
+//            String vFunToCall = MessageFormat.format(FUN_CLI_CONT,
+//                                                     vCod);
+//            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
+//                        .checkOut();
+//            String vXmlResp = vConn != null
+//                        ? vConn.executeFun(vFunToCall,
+//                                           new HashMap<String, String>())
+//                        : null;
+//            if(vConn != null)
+//            {
+//                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
+//            }
+//            String vFilePath = vTempDir + "\\resp"
+//                        + System.currentTimeMillis() + ".xml";
+//            Document vDoc = UIXmlUtilities
+//                        .buildDocumentFromXmlString(vXmlResp);
+//            if(vDoc != null)
+//            {
+//                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
+//                                                        vFilePath);
+//                Element vRoot = vDoc.getRootElement();
+//                Element vRigheEl = (vRoot != null
+//                            ? vRoot.element("Righe"): null);
+//                if(vRigheEl != null)
+//                {
+//                    ArrayList<Element> vList = new ArrayList(
+//                                vRigheEl.elements("Riga"));
+//                    Iterator<Element> vElIter = vList.iterator();
+//                    while(vElIter.hasNext())
+//                    {
+//                        Element vElement = (Element) vElIter.next();
+//                        String vFld = vElement.attributeValue("Fld",
+//                                                              "");
+//                        if(vFld.indexOf("|") > -1)
+//                        {
+//                            String[] vSplit = vFld.split("\\|");
+//                            if(vSplit[0].toUpperCase()
+//                                        .startsWith("G. RIFERIMENTI CONTABILI"))
+//                            {
+//                                String vA39Row = (vSplit.length > 2
+//                                            ? "<b>" + vSplit[2]
+//                                                        + "</b>"
+//                                            : "")
+//                                            + ":\t"
+//                                            + (vSplit.length > 5
+//                                                        ? "<i>" + vSplit[5]
+//                                                                    + "</i>"
+//                                                        : "");
+//                                vResp += "\r\n".concat(vA39Row);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            String vRespText = "Ciao " + vFirstName + " "
+//                        + vLastName
+//                        + ". Ecco quello che hai chiesto: "
+//                        + (vResp != null
+//                                    ? (vResp.length() > 4000
+//                                                ? vResp.substring(0,
+//                                                                  3000)
+//                                                : vResp)
+//                                    : "Risposta nulla");
+//            try
+//            {
+//                vRespMsg = new String(vRespText.getBytes(),
+//                            "UTF-8");
+//            }
+//            catch(UnsupportedEncodingException ex)
+//            {
+//                // TODO Auto-generated catch block
+//                ex.printStackTrace();
+//            }
+//
+//        }
         else if(vFun.toUpperCase().startsWith("USERLIST")
                     || vFun.toUpperCase().startsWith("USERLIST"))
         {
             String vResp = "";
             String vFunToCall = FUN_AUTH_LIST;
             String vXmlResp;
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM
+            A39Connection vConn = SmeupConnectors.CLIENT_A39
                         .checkOut();
             vXmlResp = vConn != null
                         ? vConn.executeFun(vFunToCall,
@@ -1761,7 +1761,7 @@ public class SmeupCommand extends AbstractCommand
                         : null;
             if(vConn != null)
             {
-                SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+                SmeupConnectors.CLIENT_A39.checkIn(vConn);
             }
             String vFilePath = vTempDir + "\\resp"
                         + System.currentTimeMillis() + ".xml";
@@ -1854,73 +1854,73 @@ public class SmeupCommand extends AbstractCommand
 //                                                vKeyboardMarkup);
 
         }
-        else if("FUNLIST".equalsIgnoreCase(vFun))
-        {
-            String vFunToCall = "FUN_LIST_XML";
-            String vResp = "";
-            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
-                        .checkOut();
-            String vXmlResp = vConn != null
-                        ? vConn.executeFun(vFunToCall,
-                                           new HashMap<String, String>())
-                        : null;
-            if(vConn != null)
-            {
-                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
-            }
-            String vFilePath = vTempDir + "\\resp"
-                        + System.currentTimeMillis() + ".xml";
-            Document vDoc = UIXmlUtilities
-                        .buildDocumentFromXmlString(vXmlResp);
-            if(vDoc != null)
-            {
-                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
-                                                        vFilePath);
-                Element vRoot = vDoc.getRootElement();
-                Element vRigheEl = (vRoot != null
-                            ? vRoot.element("Righe"): null);
-                if(vRigheEl != null)
-                {
-                    ArrayList<Element> vList = new ArrayList(
-                                vRigheEl.elements("Riga"));
-                    Iterator<Element> vElIter = vList.iterator();
-                    while(vElIter.hasNext())
-                    {
-                        Element vElement = (Element) vElIter.next();
-                        String vFld = vElement.attributeValue("Fld",
-                                                              "");
-                        if(vFld.indexOf("|") > -1)
-                        {
-                            String vA39Command = vFld
-                                        .substring(0, vFld
-                                                    .indexOf("|"));
-                            vResp += "\r\n"
-                                        .concat("/" + vA39Command);
-                        }
-                    }
-                }
-            }
-            String vRespText = "Ciao " + vFirstName + " "
-                        + vLastName
-                        + ". Ecco quello che hai chiesto: "
-                        + (vResp != null
-                                    ? (vResp.length() > 4096
-                                                ? vResp.substring(0,
-                                                                  4000)
-                                                : vResp)
-                                    : "Risposta nulla");
-            try
-            {
-                vRespMsg = new String(vRespText.getBytes(),
-                            "UTF-8");
-            }
-            catch(UnsupportedEncodingException ex)
-            {
-                // TODO Auto-generated catch block
-                ex.printStackTrace();
-            }
-
-        }
+//        else if("FUNLIST".equalsIgnoreCase(vFun))
+//        {
+//            String vFunToCall = "FUN_LIST_XML";
+//            String vResp = "";
+//            A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
+//                        .checkOut();
+//            String vXmlResp = vConn != null
+//                        ? vConn.executeFun(vFunToCall,
+//                                           new HashMap<String, String>())
+//                        : null;
+//            if(vConn != null)
+//            {
+//                SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
+//            }
+//            String vFilePath = vTempDir + "\\resp"
+//                        + System.currentTimeMillis() + ".xml";
+//            Document vDoc = UIXmlUtilities
+//                        .buildDocumentFromXmlString(vXmlResp);
+//            if(vDoc != null)
+//            {
+//                UIXmlUtilities.buildXmlFileFromDocument(vDoc,
+//                                                        vFilePath);
+//                Element vRoot = vDoc.getRootElement();
+//                Element vRigheEl = (vRoot != null
+//                            ? vRoot.element("Righe"): null);
+//                if(vRigheEl != null)
+//                {
+//                    ArrayList<Element> vList = new ArrayList(
+//                                vRigheEl.elements("Riga"));
+//                    Iterator<Element> vElIter = vList.iterator();
+//                    while(vElIter.hasNext())
+//                    {
+//                        Element vElement = (Element) vElIter.next();
+//                        String vFld = vElement.attributeValue("Fld",
+//                                                              "");
+//                        if(vFld.indexOf("|") > -1)
+//                        {
+//                            String vA39Command = vFld
+//                                        .substring(0, vFld
+//                                                    .indexOf("|"));
+//                            vResp += "\r\n"
+//                                        .concat("/" + vA39Command);
+//                        }
+//                    }
+//                }
+//            }
+//            String vRespText = "Ciao " + vFirstName + " "
+//                        + vLastName
+//                        + ". Ecco quello che hai chiesto: "
+//                        + (vResp != null
+//                                    ? (vResp.length() > 4096
+//                                                ? vResp.substring(0,
+//                                                                  4000)
+//                                                : vResp)
+//                                    : "Risposta nulla");
+//            try
+//            {
+//                vRespMsg = new String(vRespText.getBytes(),
+//                            "UTF-8");
+//            }
+//            catch(UnsupportedEncodingException ex)
+//            {
+//                // TODO Auto-generated catch block
+//                ex.printStackTrace();
+//            }
+//
+//        }
         else
         {
             if(true)
@@ -1928,7 +1928,7 @@ public class SmeupCommand extends AbstractCommand
             {
 //                UIFunInputStructure vStruct = UIFunctionDecoder
 //                            .getFunInputStructure(vFun);
-                A39Connection vConn = SmeupConnectors.CLIENT_SRVLAB01
+                A39Connection vConn = SmeupConnectors.CLIENT_A39
                             .checkOut();
                 String vResp = vConn != null
                             ? vConn.executeFun(vFun,
@@ -1936,7 +1936,7 @@ public class SmeupCommand extends AbstractCommand
                             : null;
                 if(vConn != null)
                 {
-                    SmeupConnectors.CLIENT_SRVLAB01.checkIn(vConn);
+                    SmeupConnectors.CLIENT_A39.checkIn(vConn);
                 }
 
                 String vFilePath = vTempDir + "\\resp"

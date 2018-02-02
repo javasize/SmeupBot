@@ -208,12 +208,12 @@ public class Utility
         String[][] vRet = new String[][] {};
         String vFunToCall = SmeupCommand.FUN_AUTH_LIST;
         String vXmlResp=null;
-        A39Connection vConn = SmeupConnectors.CLIENT_SRVAMM.checkOut();
+        A39Connection vConn = SmeupConnectors.CLIENT_A39.checkOut();
         if(vConn != null)
         {
             vXmlResp = vConn.executeFun(vFunToCall,
                                            new HashMap<String, String>());
-            SmeupConnectors.CLIENT_SRVAMM.checkIn(vConn);
+            SmeupConnectors.CLIENT_A39.checkIn(vConn);
         }
         else
         {
