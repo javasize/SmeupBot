@@ -834,10 +834,10 @@ public class SmeupCommand extends AbstractCommand
                         if(vFld.indexOf("|") > -1)
                         {
                             String[] vSplit = vFld.split("\\|");
-                            vCodCol = (vSplit.length > 5
-                                        ? vSplit[5]: "");
-                            vDescCol = (vSplit.length > 6
-                                        ? vSplit[6]: "");
+                            vCodCol = (vSplit.length > 3
+                                        ? vSplit[3]: "");
+                            vDescCol = (vSplit.length > 4
+                                        ? vSplit[4]: "");
                             if(vCodCol != null
                                         && !"".equalsIgnoreCase(vCodCol
                                                     .trim()))
