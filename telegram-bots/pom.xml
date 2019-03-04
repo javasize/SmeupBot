@@ -137,7 +137,12 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.25</version>
 		</dependency>
-
+		<!-- Parser jason -->
+		<dependency>
+    		<groupId>com.googlecode.json-simple</groupId>
+    		<artifactId>json-simple</artifactId>
+    		<version>1.1.1</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.github.nixtabyte.telegram/jtelebot-core -->
 		<!-- <dependency> -->
 		<!-- <groupId>io.github.nixtabyte.telegram</groupId> -->

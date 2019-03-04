@@ -2,3 +2,5 @@
 /temp/
 .classpath
 .project
+./.project
+/bot_connections.txt

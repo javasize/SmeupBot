@@ -14,9 +14,7 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.github.nixtabyte.telegram.jtelebot.response.json.ReplyKeyboardMarkup;
 import io.github.nixtabyte.telegram.jtelebot.response.json.CustomReplyKeyboard;
-
 /**
 *
 * ReplyKeyboardMarkup
@@ -24,15 +22,14 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.CustomReplyKeyboard;
 * @since 0.0.1
 */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CiaoReplyKeyboardMarkup extends ReplyKeyboardMarkup{
+public class KickOffReplyKeyboardMarkup implements CustomReplyKeyboard{
 
 	/**
 	 * Array of button rows, each represented by an Array of Strings
 	 * */
 	@JsonProperty("keyboard")
-    private String[][] keyboard= new String[][] {{"KICK OFF 2019"}, {"Agende"}, {"Sentinelle"}, {"Commesse"}, {"Indici"}, {"Oggi"}};
-//    private String[][] keyboard= new String[][] {{"Agende"}, {"Sentinelle"}, {"Commesse"}};
-
+	private String[][] keyboard= new String[][] {{"Pullman"}, {"Gruppi"}, {"Start"}};
+    
 	/**
 	 * Optional. Requests clients to resize the keyboard vertically for optimal
 	 * fit (e.g., make the keyboard smaller if there are just two rows of
@@ -166,7 +163,7 @@ public class CiaoReplyKeyboardMarkup extends ReplyKeyboardMarkup{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CiaoReplyKeyboardMarkup other = (CiaoReplyKeyboardMarkup) obj;
+		KickOffReplyKeyboardMarkup other = (KickOffReplyKeyboardMarkup) obj;
 		if (!Arrays.deepEquals(keyboard, other.keyboard))
 			return false;
 		if (oneTimeKeyboard == null) {

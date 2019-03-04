@@ -23,21 +23,22 @@ import java.util.Iterator;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import Smeup.smeui.iotspi.connectors.telegram.FileRequestHandler;
 import Smeup.smeui.iotspi.connectors.telegram.SmeupResponseData;
 import Smeup.smeui.iotspi.connectors.telegram.keyboard.AgendeReplyKeyboardMarkup;
 import Smeup.smeui.iotspi.connectors.telegram.keyboard.CiaoReplyKeyboardMarkup;
-import Smeup.smeui.iotspi.connectors.telegram.keyboard.ClienteReplyKeyboardMarkup;
 import Smeup.smeui.iotspi.connectors.telegram.keyboard.CommesseReplyKeyboardMarkup;
 import Smeup.smeui.iotspi.connectors.telegram.keyboard.IndiciReplyKeyboardMarkup;
+import Smeup.smeui.iotspi.connectors.telegram.keyboard.KickOffReplyKeyboardMarkup;
 import Smeup.smeui.iotspi.connectors.telegram.keyboard.StartReplyKeyboardMarkup;
 import Smeup.smeui.iotspi.connectors.telegram.utility.SmeupConnectors;
 import Smeup.smeui.iotspi.connectors.telegram.utility.Utility;
 import Smeup.smeui.loa39.utility.A39Connection;
-import Smeup.smeui.loa39.utility.StringUtility;
 import Smeup.smeui.loa39.utility.UIXmlUtilities;
 import config.BotData;
 import config.MessageType;
@@ -89,6 +90,12 @@ public class SmeupCommand extends AbstractCommand
 
     static final String FUN_IND_DAY = "F(EXB;X1AGEN_01;ANA.SIT) 1(D8;*YYMD;{0}) P(PER())";
     
+    static final String FUN_LIS_PUL = "LISPULL";
+    static final String FUN_PUL_PAS = "PULLPASS";
+    static final String FUN_LIS_GRU = "LISGRU";
+    static final String FUN_GRU_PER = "GROPEO";
+    
+    static final int NUMERO_MASSIMO_ELEMENTI = 130;
     // static final String FUN_AUTH_LIST = "F(EXB;LOA10_SE;ELE) 1(LI;CNCOL;*)
     // 2(;;) INPUT(Sch(Q/RU) WHR(E§LIVE <= '8' AND E§STAT='10') ORDER(E§CRAG)
     // NCf(1) Context() SchPar() NTit(1) Qry(Yes) RPa(800,00000))";
@@ -1921,11 +1928,342 @@ public class SmeupCommand extends AbstractCommand
 //            }
 //
 //        }
+        else if(vFun.toUpperCase().startsWith("KICK"))
+        {
+            String vRespText = "Ciao " + vFirstName + " "
+                        + vLastName
+                        + ". Ecco l'elenco delle richieste.";
+            try
+            {
+                vRespMsg = new String(vRespText.getBytes(),
+                            "UTF-8");
+            }
+            catch(UnsupportedEncodingException ex)
+            {
+                // TODO Auto-generated catch block
+                ex.printStackTrace();
+            }
+
+            if(!aIsNotification)
+            {
+                vKeyboardMarkup = new KickOffReplyKeyboardMarkup();
+            }
+        }
+        else if (vFun.toUpperCase().startsWith("PULLMAN_")) {
+        	String vCodicePullman = "";
+            String vFunToCall = FUN_PUL_PAS;
+            String vNumeroIter = "0";
+            if (vFun.contains("_CONTINUA_")) {
+            	vNumeroIter = vFun.substring(vFun.indexOf("_CONTINUA_")+("_CONTINUA_").length());
+            	vCodicePullman = vFun.substring(("PULLMAN_").length(),vFun.indexOf("_CONTINUA_"));
+            } else {
+            	vCodicePullman = vFun.substring(("PULLMAN_").length());
+            }
+            int contaPagine=0;
+            if (vNumeroIter!=null) {
+            	try {
+            		contaPagine=Integer.parseInt(vNumeroIter);
+            	} catch (Exception e) {
+            		
+            	}
+            }
+            HashMap<String, String> hm = new HashMap<String, String>();
+            hm.put("*AUTH", "NULL");
+            hm.put("XXCOD",vCodicePullman);
+            
+			String vJResp;
+			A39Connection vConn = SmeupConnectors.CLIENT_A39.checkOut();
+			vJResp = vConn != null ? vConn.executeFun(vFunToCall,hm): null;
+			if(vConn != null) {
+				SmeupConnectors.CLIENT_A39.checkIn(vConn);
+			}
+			JSONParser jPar = new JSONParser();
+			Object oResp = null;
+			try {
+				oResp = jPar.parse(vJResp);
+			} catch (org.json.simple.parser.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (oResp != null) {
+				JSONObject jResp = (JSONObject) oResp;
+				JSONObject jRoot = (JSONObject) jResp.get("root");
+				JSONArray passeggeri = (JSONArray)jRoot.get("datarows");
+				if (passeggeri != null && !passeggeri.isEmpty()) {
+                	String vResp="";
+                	int cntTot = 0;
+                    Iterator<JSONObject> vElIter = passeggeri.iterator();
+	                while(vElIter.hasNext())
+	                {
+
+	                	JSONObject vElement = (JSONObject) vElIter.next();
+	                	String nome = (String) vElement.get("R1NOME");
+	                	String cognome = (String) vElement.get("R1COGN");
+
+                        String vA39Row = nome + " "
+	                                     + "<b>" + cognome + "</b>";
+                        
+                        int quoz = cntTot / NUMERO_MASSIMO_ELEMENTI;
+                        if (quoz==contaPagine) {                	
+	                        vResp += "\r\n".concat(vA39Row);
+                        } else {
+                        	if (quoz > contaPagine) {
+	                        	vResp += "\r\n".concat("\t" + "/PULLMAN_"+vCodicePullman+"_CONTINUA_"+quoz);
+	                        	break;
+                        	}
+                        }
+	                	cntTot++;
+//	                    if (vResp.length() + "\r\n".concat(vA39Row).length() <= 4096) {
+//	                        vResp += "\r\n".concat(vA39Row);
+//	                    } else {
+//	                        break;
+//	                    }
+	                }
+	                try
+	                {
+	                    vRespMsg = new String(vResp.getBytes(),
+	                                "UTF-8");
+	                }
+	                catch(UnsupportedEncodingException ex)
+	                {
+	                    // TODO Auto-generated catch block
+	                    ex.printStackTrace();
+	                }
+				} else {
+		            try
+		            {
+		                vRespMsg = new String(vJResp.getBytes(),
+		                            "UTF-8");
+		            }
+		            catch(UnsupportedEncodingException ex)
+		            {
+		                // TODO Auto-generated catch block
+		                ex.printStackTrace();
+		            }
+				}
+				
+			}
+
+        }
+        else if (vFun.toUpperCase().startsWith("PULLMAN")) {
+            String vFunToCall = FUN_LIS_PUL;
+            HashMap<String, String> hm = new HashMap<String, String>();
+            hm.put("*AUTH", "NULL");
+
+			String vJResp;
+			A39Connection vConn = SmeupConnectors.CLIENT_A39.checkOut();
+			vJResp = vConn != null ? vConn.executeFun(vFunToCall,hm): null;
+			if(vConn != null) {
+				SmeupConnectors.CLIENT_A39.checkIn(vConn);
+			}
+			
+			JSONParser jPar = new JSONParser();
+			Object oResp = null;
+			try {
+				oResp = jPar.parse(vJResp);
+			} catch (org.json.simple.parser.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (oResp != null) {
+				JSONObject jResp = (JSONObject) oResp;
+				JSONObject jRoot = (JSONObject) jResp.get("root");
+				JSONArray pullmanList = (JSONArray)jRoot.get("datarows");
+				if (pullmanList != null && !pullmanList.isEmpty()) {
+                	String vResp="";
+                    Iterator<JSONObject> vElIter = pullmanList.iterator();
+	                while(vElIter.hasNext())
+	                {
+	                	JSONObject vElement = (JSONObject) vElIter.next();
+	                	String vDesPull = (String) vElement.get("XXRES");
+	                	String vCodPull = (String) vElement.get("XXCOD");
+	                	int vnumPers = ((Long) vElement.get("XXNUM")).intValue();
+
+                        String vA39Row = "<b>"
+                                         + vDesPull + "</b>"
+                                         + " " + vnumPers + " persone " 
+	                                     + "\t" + "/PULLMAN_"
+	                                     + vCodPull;
+                        
+	                    if (vResp.length() + "\r\n".concat(vA39Row).length() <= 4096) {
+	                        vResp += "\r\n".concat(vA39Row);
+	                    } else {
+	                        break;
+	                    }
+	                }
+	                try
+	                {
+	                    vRespMsg = new String(vResp.getBytes(),
+	                                "UTF-8");
+	                }
+	                catch(UnsupportedEncodingException ex)
+	                {
+	                    // TODO Auto-generated catch block
+	                    ex.printStackTrace();
+	                }
+				} else {
+		            try
+		            {
+		                vRespMsg = new String(vJResp.getBytes(),
+		                            "UTF-8");
+		            }
+		            catch(UnsupportedEncodingException ex)
+		            {
+		                // TODO Auto-generated catch block
+		                ex.printStackTrace();
+		            }
+				}
+				
+			}
+			
+        }
+        else if (vFun.toUpperCase().startsWith("GRUPPO_")) {
+        	String vCodiceGruppo = vFun.substring(("GRUPPO_").length());
+            String vFunToCall = FUN_GRU_PER;
+            HashMap<String, String> hm = new HashMap<String, String>();
+            hm.put("*AUTH", "NULL");
+            hm.put("XXCOD",vCodiceGruppo);
+            
+			String vJResp;
+			A39Connection vConn = SmeupConnectors.CLIENT_A39.checkOut();
+			vJResp = vConn != null ? vConn.executeFun(vFunToCall,hm): null;
+			if(vConn != null) {
+				SmeupConnectors.CLIENT_A39.checkIn(vConn);
+			}
+			JSONParser jPar = new JSONParser();
+			Object oResp = null;
+			try {
+				oResp = jPar.parse(vJResp);
+			} catch (org.json.simple.parser.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (oResp != null) {
+				JSONObject jResp = (JSONObject) oResp;
+				JSONObject jRoot = (JSONObject) jResp.get("root");
+				JSONArray persone = (JSONArray)jRoot.get("datarows");
+				if (persone != null && !persone.isEmpty()) {
+                	String vResp="";
+                    Iterator<JSONObject> vElIter = persone.iterator();
+	                while(vElIter.hasNext())
+	                {
+	                	JSONObject vElement = (JSONObject) vElIter.next();
+	                	String nome = (String) vElement.get("R1NOME");
+	                	String cognome = (String) vElement.get("R1COGN");
+
+                        String vA39Row = nome + " "
+	                                     + "<b>" + cognome + "</b>";
+                        
+	                    if (vResp.length() + "\r\n".concat(vA39Row).length() <= 4096) {
+	                        vResp += "\r\n".concat(vA39Row);
+	                    } else {
+	                        break;
+	                    }
+	                }
+	                try
+	                {
+	                    vRespMsg = new String(vResp.getBytes(),
+	                                "UTF-8");
+	                }
+	                catch(UnsupportedEncodingException ex)
+	                {
+	                    // TODO Auto-generated catch block
+	                    ex.printStackTrace();
+	                }
+				} else {
+		            try
+		            {
+		                vRespMsg = new String(vJResp.getBytes(),
+		                            "UTF-8");
+		            }
+		            catch(UnsupportedEncodingException ex)
+		            {
+		                // TODO Auto-generated catch block
+		                ex.printStackTrace();
+		            }
+				}
+				
+			}
+
+        }
+
+        else if(vFun.toUpperCase().startsWith("GRUPPI"))
+        {
+            String vFunToCall = FUN_LIS_GRU;
+            HashMap<String, String> hm = new HashMap<String, String>();
+            hm.put("*AUTH", "NULL");
+
+			String vJResp;
+			A39Connection vConn = SmeupConnectors.CLIENT_A39.checkOut();
+			vJResp = vConn != null ? vConn.executeFun(vFunToCall,hm): null;
+			if(vConn != null) {
+				SmeupConnectors.CLIENT_A39.checkIn(vConn);
+			}
+			
+			JSONParser jPar = new JSONParser();
+			Object oResp = null;
+			try {
+				oResp = jPar.parse(vJResp);
+			} catch (org.json.simple.parser.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (oResp != null) {
+				JSONObject jResp = (JSONObject) oResp;
+				JSONObject jRoot = (JSONObject) jResp.get("root");
+				JSONArray gruppiList = (JSONArray)jRoot.get("datarows");
+				if (gruppiList != null && !gruppiList.isEmpty()) {
+                	String vResp="";
+                    Iterator<JSONObject> vElIter = gruppiList.iterator();
+	                while(vElIter.hasNext())
+	                {
+	                	JSONObject vElement = (JSONObject) vElIter.next();
+	                	String vDesPull = (String) vElement.get("XXRES");
+	                	String vCodPull = (String) vElement.get("XXCOD");
+	                	int vnumPers = ((Long) vElement.get("XXNUM")).intValue();
+
+                        String vA39Row = "<b>"
+                                         + vDesPull + "</b>"
+                                         + " " + vnumPers + " persone " 
+	                                     + "\t" + "/GRUPPO_"
+	                                     + vCodPull;
+                        
+	                    if (vResp.length() + "\r\n".concat(vA39Row).length() <= 4096) {
+	                        vResp += "\r\n".concat(vA39Row);
+	                    } else {
+	                        break;
+	                    }
+	                }
+	                try
+	                {
+	                    vRespMsg = new String(vResp.getBytes(),
+	                                "UTF-8");
+	                }
+	                catch(UnsupportedEncodingException ex)
+	                {
+	                    // TODO Auto-generated catch block
+	                    ex.printStackTrace();
+	                }
+				} else {
+		            try
+		            {
+		                vRespMsg = new String(vJResp.getBytes(),
+		                            "UTF-8");
+		            }
+		            catch(UnsupportedEncodingException ex)
+		            {
+		                // TODO Auto-generated catch block
+		                ex.printStackTrace();
+		            }
+				}
+				
+			}
+        }
         else
         {
-            if(true)
-//            if(UIFunctionDecoder.isValidSyntaxFormat(vFun))
-            {
+//            if(true)
+////            if(UIFunctionDecoder.isValidSyntaxFormat(vFun))
+//            {
 //                UIFunInputStructure vStruct = UIFunctionDecoder
 //                            .getFunInputStructure(vFun);
                 A39Connection vConn = SmeupConnectors.CLIENT_A39
@@ -1941,45 +2279,62 @@ public class SmeupCommand extends AbstractCommand
 
                 String vFilePath = vTempDir + "\\resp"
                             + System.currentTimeMillis() + ".xml";
-                UIXmlUtilities.buildXmlFileFromDocument(
-                                                        UIXmlUtilities
-                                                                    .buildDocumentFromXmlString(vResp),
-                                                        vFilePath);
-                String vRespText = "Ciao " + vFirstName + " "
-                            + vLastName
-                            + ". Ecco quello che hai chiesto: "
-                            + (vResp != null
-                                        ? (vResp.length() > 4096
-                                                    ? vResp.substring(0,
-                                                                      4000)
-                                                    : vResp)
-                                        : "Risposta nulla");
-                try
-                {
-                    vRespMsg = new String(vRespText.getBytes(),
-                                "UTF-8");
+                
+                Document doc = UIXmlUtilities
+                        .buildDocumentFromXmlString(vResp);
+                
+                if (doc != null) {
+	                UIXmlUtilities.buildXmlFileFromDocument(
+	                                                        doc,
+	                                                        vFilePath);
+	                String vRespText = "Ciao " + vFirstName + " "
+	                            + vLastName
+	                            + ". Ecco quello che hai chiesto: "
+	                            + (vResp != null
+	                                        ? (vResp.length() > 4096
+	                                                    ? vResp.substring(0,
+	                                                                      4000)
+	                                                    : vResp)
+	                                        : "Risposta nulla");
+	                try
+	                {
+	                    vRespMsg = new String(vRespText.getBytes(),
+	                                "UTF-8");
+	                }
+	                catch(UnsupportedEncodingException ex)
+	                {
+	                    // TODO Auto-generated catch block
+	                    ex.printStackTrace();
+	                }
+                } else {
+                  try
+                  {
+                      vRespMsg = new String(
+                                  "Richiesta non supportata".getBytes(),
+                                  "UTF-8");
+                  }
+                  catch(UnsupportedEncodingException ex)
+                  {
+                      // TODO Auto-generated catch block
+                      ex.printStackTrace();
+                  }              	
                 }
-                catch(UnsupportedEncodingException ex)
-                {
-                    // TODO Auto-generated catch block
-                    ex.printStackTrace();
-                }
-            }
-            else
-            {
-                try
-                {
-                    vRespMsg = new String(
-                                "Richiesta non supportata".getBytes(),
-                                "UTF-8");
-                }
-                catch(UnsupportedEncodingException ex)
-                {
-                    // TODO Auto-generated catch block
-                    ex.printStackTrace();
-                }
-
-            }
+//            }
+//            else
+//            {
+//                try
+//                {
+//                    vRespMsg = new String(
+//                                "Richiesta non supportata".getBytes(),
+//                                "UTF-8");
+//                }
+//                catch(UnsupportedEncodingException ex)
+//                {
+//                    // TODO Auto-generated catch block
+//                    ex.printStackTrace();
+//                }
+//
+//            }
         }
         return new SmeupResponseData(vRespMsg, vKeyboardMarkup);
     }
@@ -2012,10 +2367,11 @@ public class SmeupCommand extends AbstractCommand
         String vTempDir = ".\\temp";
         new File(vTempDir).mkdirs();
         String vRespMsg = null;
-        if(Utility.isEnablesUserName(vFirstName, vLastName, iBotName))
+//MPB - 2019-03-01 commentato il controllo sugli utenti autorizzati
+//        if(Utility.isEnablesUserName(vFirstName, vLastName, iBotName))
         // if(isEnablesUserID(vUserID) || isEnablesUserName(vFirstName,
         // vLastName))
-        {
+//        {
             if(MessageType.TEXT_MESSAGE.compareTo(vMessageType) == 0)
             {
                 System.out.println("@" + iBotName + ": Messaggio da "
@@ -2164,16 +2520,17 @@ public class SmeupCommand extends AbstractCommand
                 }
 
             }
-        }
-        // else if(!isEnablesUserID(vUserID))
-        // {
-        // vRespMsg = "Client " + vUserID + " non abilitato";
-        // }
-        else
-        {
-            vRespMsg = "Utente " + vFirstName + " " + vLastName
-                        + " non autorizzato";
-        }
+//MPB - 2019-03-01 commentato il controllo sugli utenti autorizzati
+//        }
+//        // else if(!isEnablesUserID(vUserID))
+//        // {
+//        // vRespMsg = "Client " + vUserID + " non abilitato";
+//        // }
+//        else
+//        {
+//            vRespMsg = "Utente " + vFirstName + " " + vLastName
+//                        + " non autorizzato";
+//        }
 
         if(telegramRequest == null)
         {
