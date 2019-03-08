@@ -2045,6 +2045,23 @@ public class SmeupCommand extends AbstractCommand
 		            }
 				}
 				
+			}  else {
+				String vResp="";
+                String vA39Row = "Errore nella richiesta. Riprovare più tardi.";
+       
+                if (vResp.length() + "\r\n".concat(vA39Row).length() <= 4096) {
+                	vResp += "\r\n".concat(vA39Row);
+                }
+	            try
+	            {
+	                vRespMsg = new String(vResp.getBytes(),
+	                            "UTF-8");
+	            }
+	            catch(UnsupportedEncodingException ex)
+	            {
+	                // TODO Auto-generated catch block
+	                ex.printStackTrace();
+	            }
 			}
 
         }
@@ -2117,6 +2134,23 @@ public class SmeupCommand extends AbstractCommand
 		            }
 				}
 				
+			} else {
+				String vResp="";
+                String vA39Row = "Errore nella richiesta. Riprovare più tardi.";
+       
+                if (vResp.length() + "\r\n".concat(vA39Row).length() <= 4096) {
+                	vResp += "\r\n".concat(vA39Row);
+                }
+	            try
+	            {
+	                vRespMsg = new String(vResp.getBytes(),
+	                            "UTF-8");
+	            }
+	            catch(UnsupportedEncodingException ex)
+	            {
+	                // TODO Auto-generated catch block
+	                ex.printStackTrace();
+	            }
 			}
 			
         }
@@ -2186,6 +2220,23 @@ public class SmeupCommand extends AbstractCommand
 		            }
 				}
 				
+			} else {
+				String vResp="";
+                String vA39Row = "Errore nella richiesta. Riprovare più tardi.";
+       
+                if (vResp.length() + "\r\n".concat(vA39Row).length() <= 4096) {
+                	vResp += "\r\n".concat(vA39Row);
+                }
+	            try
+	            {
+	                vRespMsg = new String(vResp.getBytes(),
+	                            "UTF-8");
+	            }
+	            catch(UnsupportedEncodingException ex)
+	            {
+	                // TODO Auto-generated catch block
+	                ex.printStackTrace();
+	            }
 			}
 
         }
@@ -2260,6 +2311,23 @@ public class SmeupCommand extends AbstractCommand
 		            }
 				}
 				
+			} else {
+				String vResp="";
+                String vA39Row = "Errore nella richiesta. Riprovare più tardi.";
+       
+                if (vResp.length() + "\r\n".concat(vA39Row).length() <= 4096) {
+                	vResp += "\r\n".concat(vA39Row);
+                }
+	            try
+	            {
+	                vRespMsg = new String(vResp.getBytes(),
+	                            "UTF-8");
+	            }
+	            catch(UnsupportedEncodingException ex)
+	            {
+	                // TODO Auto-generated catch block
+	                ex.printStackTrace();
+	            }
 			}
         }
         else if(vFun.toUpperCase().startsWith("MIODETTAGLIO"))
@@ -2355,6 +2423,23 @@ public class SmeupCommand extends AbstractCommand
 		            }
 				}
 				
+			} else {
+				String vResp="";
+                String vA39Row = "Errore nella richiesta. Riprovare più tardi.";
+       
+                if (vResp.length() + "\r\n".concat(vA39Row).length() <= 4096) {
+                	vResp += "\r\n".concat(vA39Row);
+                }
+	            try
+	            {
+	                vRespMsg = new String(vResp.getBytes(),
+	                            "UTF-8");
+	            }
+	            catch(UnsupportedEncodingException ex)
+	            {
+	                // TODO Auto-generated catch block
+	                ex.printStackTrace();
+	            }
 			}
         }
         else
