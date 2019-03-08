@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.swing.plaf.basic.BasicScrollPaneUI.VSBChangeListener;
+
 import org.apache.http.message.BasicNameValuePair;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -94,6 +96,7 @@ public class SmeupCommand extends AbstractCommand
     static final String FUN_PUL_PAS = "PULLPASS";
     static final String FUN_LIS_GRU = "LISGRU";
     static final String FUN_GRU_PER = "GROPEO";
+    static final String FUN_PER_DET = "PEODET";
     
     static final int NUMERO_MASSIMO_ELEMENTI = 130;
     // static final String FUN_AUTH_LIST = "F(EXB;LOA10_SE;ELE) 1(LI;CNCOL;*)
@@ -2248,6 +2251,101 @@ public class SmeupCommand extends AbstractCommand
 		            try
 		            {
 		                vRespMsg = new String(vJResp.getBytes(),
+		                            "UTF-8");
+		            }
+		            catch(UnsupportedEncodingException ex)
+		            {
+		                // TODO Auto-generated catch block
+		                ex.printStackTrace();
+		            }
+				}
+				
+			}
+        }
+        else if(vFun.toUpperCase().startsWith("MIODETTAGLIO"))
+        {
+            String vFunToCall = FUN_PER_DET;
+            HashMap<String, String> hm = new HashMap<String, String>();
+            hm.put("*AUTH", "NULL");
+            hm.put("NAM", vFirstName);
+            hm.put("SUR", vLastName);
+
+			String vJResp;
+			A39Connection vConn = SmeupConnectors.CLIENT_A39.checkOut();
+			vJResp = vConn != null ? vConn.executeFun(vFunToCall,hm): null;
+			if(vConn != null) {
+				SmeupConnectors.CLIENT_A39.checkIn(vConn);
+			}
+			
+			JSONParser jPar = new JSONParser();
+			Object oResp = null;
+			try {
+				oResp = jPar.parse(vJResp);
+			} catch (org.json.simple.parser.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (oResp != null) {
+				JSONObject jResp = (JSONObject) oResp;
+				JSONObject jRoot = (JSONObject) jResp.get("root");
+				JSONArray gruppiList = (JSONArray)jRoot.get("datarows");
+				if (gruppiList != null && !gruppiList.isEmpty()) {
+                	String vResp="";
+                    Iterator<JSONObject> vElIter = gruppiList.iterator();
+	                while(vElIter.hasNext())
+	                {
+	                	JSONObject vElement = (JSONObject) vElIter.next();
+	                	String vDesPull = (String) vElement.get("DESPUL");
+	                	String vCodPull = (String) vElement.get("CODPUL");
+	                	String vDesGrup = (String) vElement.get("DESGRU");
+	                	String vCodGrup = (String) vElement.get("CODGRU");
+
+                        String vA39Row = "Ciao " + vFirstName + " " + vLastName + "." +
+                        		         "\r\n"+
+                                		 "Ecco i tuoi riferimenti: "+
+                                		 "\r\n"+
+                                		 "Pullman: "+
+                        				 "<b>"
+                                         + vDesPull + "</b>"
+	                                     + "\t" + "/PULLMAN_"
+	                                     + vCodPull+
+	                                     "\r\n"+
+	                                     "Gruppo: "+
+                        				 "<b>"
+                                         + vDesGrup + "</b>"
+	                                     + "\t" + "/GRUPPO_"
+	                                     + vCodGrup;
+                        
+	                    if (vResp.length() + "\r\n".concat(vA39Row).length() <= 4096) {
+	                        vResp += "\r\n".concat(vA39Row);
+	                    } else {
+	                        break;
+	                    }
+	                }
+	                try
+	                {
+	                    vRespMsg = new String(vResp.getBytes(),
+	                                "UTF-8");
+	                }
+	                catch(UnsupportedEncodingException ex)
+	                {
+	                    // TODO Auto-generated catch block
+	                    ex.printStackTrace();
+	                }
+				} else {
+					String vResp="";
+                    String vA39Row = "Ciao " + vFirstName + " " + vLastName + "." +
+           		         "\r\n"+
+                   		 "Siamo spiacenti, i tuoi riferimenti non sono stati trovati."+
+                   		 "\r\n"+
+                   		 "Manca la corrispondenza tra il nome del tuo account Telegram e i dati inseriti nel form di registrazione del Kick Off.";
+           
+                    if (vResp.length() + "\r\n".concat(vA39Row).length() <= 4096) {
+                    	vResp += "\r\n".concat(vA39Row);
+                    }
+		            try
+		            {
+		                vRespMsg = new String(vResp.getBytes(),
 		                            "UTF-8");
 		            }
 		            catch(UnsupportedEncodingException ex)
