@@ -116,10 +116,10 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 		for (final Object updateObj : response.getResult()) {
 			final Update update = (Update) updateObj;
 
-			LOG.trace("Watching... UpdateId:" + update.getUpdateId()
-					+ " - MessageID:" + update.getMessage().getId() + " - "
-					+ update.getMessage().getFromUser().getId() + ":"
-					+ update.getMessage().getFromUser().getUsername());
+			LOG.trace("Watching... UpdateId:" + update.getUpdateId());
+//					+ " - MessageID:" + update.getMessage().getId() + " - "
+//					+ update.getMessage().getFromUser().getId() + ":"
+//					+ update.getMessage().getFromUser().getUsername());
 
 				newUpdatesCounter++;
 				// Instantiate a new Command, attach the Message object, enqueue

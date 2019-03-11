@@ -25,17 +25,17 @@ public class Utility
     public static boolean isFunctionEnabled(String aFun, String aFirstName, String aLastName, long aUserID)
     {
         boolean vRet= false;
-        if(aFun.toUpperCase().startsWith("INDICI"))
-        {
+//        if(aFun.toUpperCase().startsWith("INDICI"))
+//        {
             vRet= (("Roberto".equalsIgnoreCase(aFirstName) && "Magni".equalsIgnoreCase(aLastName)  && 247836496==aUserID) 
                         || ("Silvano".equalsIgnoreCase(aFirstName) && "Lancini".equalsIgnoreCase(aLastName) && 266430152==aUserID) 
                         || ("Piero".equalsIgnoreCase(aFirstName) && "Gagliardo".equalsIgnoreCase(aLastName)  && 41720880==aUserID) 
                         || ("Oliviero".equalsIgnoreCase(aFirstName) && "Maestrelli".equalsIgnoreCase(aLastName) && 199971507==aUserID));
-        }
-        else
-        {
-            vRet= true;
-        }
+//        }
+//        else
+//        {
+//            vRet= true;
+//        }
         return vRet;
     }
 

@@ -797,7 +797,7 @@ public class SmeupCommand extends AbstractCommand
                 ex.printStackTrace();
             }
         }
-        else if(vFun.toUpperCase().startsWith("AGENDE"))
+        else if (vFun.toUpperCase().startsWith("AGENDE") && Utility.isFunctionEnabled(vFun, vFirstName, vLastName, vUserID))
         {
             String vResp = "";
             String vCodStart = "";
@@ -916,8 +916,8 @@ public class SmeupCommand extends AbstractCommand
                 vKeyboardMarkup = new AgendeReplyKeyboardMarkup();
             }
         }
-        else if(vFun.toUpperCase().startsWith("AGENDA ")
-                    || vFun.toUpperCase().startsWith("AGENDA_"))
+        else if ((vFun.toUpperCase().startsWith("AGENDA ")
+                    || vFun.toUpperCase().startsWith("AGENDA_")) && Utility.isFunctionEnabled(vFun, vFirstName, vLastName, vUserID))
         {
             String vResp = "";
             String vDateNow = new SimpleDateFormat("yyyyMMdd")
@@ -1070,7 +1070,7 @@ public class SmeupCommand extends AbstractCommand
             }
 
         }
-        else if(vFun.toUpperCase().startsWith("COMMESSE"))
+        else if (vFun.toUpperCase().startsWith("COMMESSE") && Utility.isFunctionEnabled(vFun, vFirstName, vLastName, vUserID))
         {
             String vRespText = "Ciao " + vFirstName + " "
                         + vLastName
@@ -1091,8 +1091,8 @@ public class SmeupCommand extends AbstractCommand
                 vKeyboardMarkup = new CommesseReplyKeyboardMarkup();
             }
         }
-        else if(vFun.toUpperCase().startsWith("COMMESSA ")
-                    || vFun.toUpperCase().startsWith("COMMESSA_"))
+        else if ((vFun.toUpperCase().startsWith("COMMESSA ")
+                    || vFun.toUpperCase().startsWith("COMMESSA_")) && Utility.isFunctionEnabled(vFun, vFirstName, vLastName, vUserID))
         {
             String vResp = "";
             String vDateNow = new SimpleDateFormat("yyyyMMdd")
